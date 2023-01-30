@@ -1,7 +1,8 @@
 try {
-  chrome.browserAction.onClicked.addListener(function () {
+  chrome.action.onClicked.addListener((tab) => {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, "toggle")
+      const activeTab = tabs[0]
+      chrome.tabs.sendMessage(activeTab.id, "toggle")
     })
   })
 } catch (err) {

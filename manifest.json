@@ -8,12 +8,12 @@
     "48": "icons/icon.png",
     "128": "icons/icon.png"
   },
+  "action": {},
   "background": {
     "service_worker": "js/background.js"
   },
   "content_scripts": [
     {
-      "run_at": "document_end",
       "matches": [
         "https://*/*",
         "http://*/*"
@@ -36,6 +36,9 @@
   ],
   "permissions": [
     "tabs",
-    "activeTab"
+    "storage",
+    "downloads",
+    "activeTab",
+    "scripting"
   ]
 }
