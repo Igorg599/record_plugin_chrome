@@ -5,7 +5,7 @@ class Media {
     this.recording
   }
 
-  async getFlowVideo () {
+  async getFlowVideo() {
     if (navigator.mediaDevices.getDisplayMedia) {
       try {
         // получаем поток
@@ -25,23 +25,23 @@ class Media {
 
   async getFlowAudio() {
     if (navigator.mediaDevices.getUserMedia) {
-     // сначала мы должны получить видеопоток
+      // сначала мы должны получить видеопоток
       if (this.screenStream) {
         try {
           // получаем поток
           const _voiceStream = await navigator.mediaDevices.getUserMedia({
-            audio: true
+            audio: true,
           })
           // обновляем состояние
           this.voiceStream = _voiceStream
           console.log(_voiceStream)
         } catch (e) {
-          console.log('getUserMedia', e)
-          this.voiceStream = 'unavailable'
+          console.log("getUserMedia", e)
+          this.voiceStream = "unavailable"
         }
       }
     } else {
-      alert('getUserMedia not supported')
+      alert("getUserMedia not supported")
     }
   }
 }
@@ -50,7 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelector("button").addEventListener("click", async () => {
     const newMedia = new Media()
     await newMedia.getFlowVideo()
-    console.log(123);
     await newMedia.getFlowAudio()
   })
 })

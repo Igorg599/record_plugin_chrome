@@ -8,9 +8,7 @@
     "48": "icons/icon.png",
     "128": "icons/icon.png"
   },
-  "action": {
-    "default_popup": "html/popup.html"
-  },
+  "action": {},
   "background": {
     "service_worker": "js/background.js",
     "type": "module"
@@ -34,7 +32,8 @@
       "resources": [
         "html/popup.html",
         "js/popup.js",
-        "libs/html2canvas.min.js"
+        "libs/html2canvas.min.js",
+        "html/popup.html"
       ]
     }
   ],
