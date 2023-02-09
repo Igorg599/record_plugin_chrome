@@ -9,8 +9,8 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg === "close") {
     iframe.style.width = "0px"
   }
-  if (msg == "toggle") {
-    toggle()
+  if (msg == "open") {
+    iframe.style.width = "100vw"
   }
 })
 
@@ -29,11 +29,3 @@ iframe.frameBorder = "none"
 iframe.src = chrome.runtime.getURL("../html/iframe.html")
 
 document.body.appendChild(iframe)
-
-function toggle() {
-  if (iframe.style.width == "0px") {
-    iframe.style.width = "100vw"
-  } else {
-    iframe.style.width = "0px"
-  }
-}
