@@ -26,7 +26,7 @@ iframe.style.right = "0px"
 iframe.style.zIndex = "9000000000000000000"
 iframe.allow = "display-capture"
 iframe.frameBorder = "none"
-iframe.src = chrome.runtime.getURL("../html/popup.html")
+iframe.src = chrome.runtime.getURL("../html/iframe.html")
 
 document.body.appendChild(iframe)
 
