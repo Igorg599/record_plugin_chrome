@@ -53,9 +53,13 @@ document.addEventListener("DOMContentLoaded", function () {
     await newMedia.getFlowAudio()
   })
 
-  document.getElementById("close").addEventListener("click", () => {
+  document.querySelector("body").addEventListener("click", () => {
     chrome.tabs.getCurrent((tab) => {
       chrome.tabs.sendMessage(tab.id, "close")
     })
+  })
+
+  document.querySelector(".container").addEventListener("click", (e) => {
+    e.stopImmediatePropagation()
   })
 })
