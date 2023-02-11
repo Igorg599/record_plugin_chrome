@@ -1,10 +1,21 @@
 body {
   font-family: "Bebas Neue", cursive;
-  background-color: black;
   position: relative;
   padding: 0;
-  width: 200px;
+  width: inherit;
+  height: inherit;
+}
+
+.container {
+  position: absolute;
+  background-color: #ffffff;
+  box-shadow: -9px 10px 7px -7px rgba(34, 60, 80, 0.7);
+  width: 300px;
   height: 400px;
+  right: 10px;
+  top: 10px;
+  border-radius: 8px !important;
+  padding: 5px 10px;
 }
 
 h3 {

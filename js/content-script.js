@@ -16,7 +16,7 @@ chrome.runtime.onMessage.addListener((msg, _, sendResponse) => {
     case "open": {
       const iframe = document.createElement("iframe")
       iframe.id = "record_plugin"
-      iframe.style.opacity = "0.1"
+      iframe.style.backgroundColor = "rgba(0,0,0,0.1)"
       iframe.style.height = "100vh"
       iframe.style.width = "100vw"
       iframe.style.position = "fixed"
@@ -27,12 +27,14 @@ chrome.runtime.onMessage.addListener((msg, _, sendResponse) => {
       iframe.frameBorder = "none"
       iframe.src = chrome.runtime.getURL("../html/iframe.html")
       document.body.appendChild(iframe)
+      let opacity = 0.1
       let timer = setInterval(() => {
-        if (iframe.style.opacity === "0.6") {
+        if (opacity >= 0.6) {
           clearInterval(timer)
           return
         }
-        iframe.style.opacity = `${+iframe.style.opacity + 0.02}`
+        opacity += 0.02
+        iframe.style.backgroundColor = `rgba(0,0,0,${opacity})`
       }, 25)
       break
     }
