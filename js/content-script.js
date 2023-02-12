@@ -23,7 +23,7 @@ chrome.runtime.onMessage.addListener((msg, _, sendResponse) => {
       iframe.style.top = "0px"
       iframe.style.right = "0px"
       iframe.style.zIndex = "9000000000000000000"
-      iframe.allow = "display-capture"
+      iframe.allow = "microphone; camera; display-capture"
       iframe.frameBorder = "none"
       iframe.src = chrome.runtime.getURL("../html/iframe.html")
       document.body.appendChild(iframe)

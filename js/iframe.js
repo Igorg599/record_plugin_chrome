@@ -23,22 +23,20 @@ class Media {
     }
   }
 
-  async getFlowAudio() {
+  async getFlowAudioAndCamera() {
     if (navigator.mediaDevices.getUserMedia) {
-      // сначала мы должны получить видеопоток
-      if (this.screenStream) {
-        try {
-          // получаем поток
-          const _voiceStream = await navigator.mediaDevices.getUserMedia({
-            audio: true,
-          })
-          // обновляем состояние
-          this.voiceStream = _voiceStream
-          console.log(_voiceStream)
-        } catch (e) {
-          console.log("getUserMedia", e)
-          this.voiceStream = "unavailable"
-        }
+      try {
+        // получаем поток
+        const _voiceStream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+          audio: true,
+        })
+        // обновляем состояние
+        this.voiceStream = _voiceStream
+        console.log(_voiceStream)
+      } catch (e) {
+        console.log("getUserMedia", e)
+        this.voiceStream = "unavailable"
       }
     } else {
       alert("getUserMedia not supported")
@@ -46,11 +44,11 @@ class Media {
   }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
+  const newMedia = new Media()
+  await newMedia.getFlowAudioAndCamera()
   document.querySelector("button").addEventListener("click", async () => {
-    const newMedia = new Media()
     await newMedia.getFlowVideo()
-    await newMedia.getFlowAudio()
   })
 
   document.querySelector("body").addEventListener("click", () => {
