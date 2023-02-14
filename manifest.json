@@ -34,8 +34,8 @@
       "resources": [
         "html/popup.html",
         "js/iframe.js",
-        "libs/html2canvas.min.js",
-        "html/iframe.html"
+        "html/iframe.html",
+        "libs/onChanhe.min.js"
       ]
     }
   ],
