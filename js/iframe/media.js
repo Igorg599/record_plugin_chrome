@@ -42,4 +42,11 @@ export default class Media {
       this.screenStream = null
     }
   }
+
+  resetVoiceStream() {
+    if (this.voiceStream?.getTracks) {
+      this.voiceStream.getTracks().forEach((track) => track.stop())
+      this.voiceStream = null
+    }
+  }
 }

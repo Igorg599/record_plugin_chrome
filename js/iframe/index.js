@@ -3,22 +3,35 @@ import Media from "./media.js"
 
 document.addEventListener("DOMContentLoaded", async function () {
   const newMedia = new Media()
-  await newMedia.getFlowAudio()
+  // await newMedia.getFlowAudio()
 
   const initialState = {
     recording: false,
-    UIState: {},
+    UIState: {
+      switch: {
+        microphone: false,
+      },
+    },
   }
 
   const elements = {
-    buttonStart: document.querySelector("#record_start"),
-    buttonStop: document.querySelector("#record_stop"),
     body: document.querySelector("body"),
     content: document.querySelector(".content"),
     player: document.querySelector(".player"),
+    buttons: {
+      start: document.querySelector("#record_start"),
+      stop: document.querySelector("#record_stop"),
+    },
+    switch: {
+      microphone: document.querySelector("#cb1"),
+      microphoneTitle: document.querySelector(".switch_titleMicrophone"),
+    },
+    errors: {
+      microphone: document.querySelector(".error_microphone"),
+    },
   }
 
-  const watchState = watch(elements, initialState)
+  const watchState = watch(elements, initialState, newMedia)
 
   const stopRecord = () => {
     newMedia.resetScreenStream()
@@ -28,7 +41,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     })
   }
 
-  elements.buttonStart.addEventListener("click", async () => {
+  elements.buttons.start.addEventListener("click", async () => {
     await newMedia.getFlowVideo()
     if (newMedia.screenStream) {
       chrome.tabs.getCurrent((tab) => {
@@ -41,9 +54,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   })
 
-  elements.buttonStop.addEventListener("click", (e) => {
+  elements.buttons.stop.addEventListener("click", (e) => {
     e.stopImmediatePropagation()
     stopRecord()
+    // newMedia.resetVoiceStream()
   })
 
   elements.body.addEventListener("click", () => {
@@ -56,5 +70,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   elements.content.addEventListener("click", (e) => {
     e.stopImmediatePropagation()
+  })
+
+  elements.switch.microphone.addEventListener("change", (e) => {
+    watchState.UIState.switch.microphone = e.target.checked
   })
 })
