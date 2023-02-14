@@ -1,5 +1,6 @@
 chrome.runtime.onMessage.addListener((msg, _, sendResponse) => {
   const iframePlugin = document.querySelector("#record_plugin")
+
   switch (msg) {
     case "initialization": {
       addEventListener(evtFromPage, (e) => {
@@ -14,19 +15,25 @@ chrome.runtime.onMessage.addListener((msg, _, sendResponse) => {
       break
     }
     case "open": {
-      const iframe = document.createElement("iframe")
+      const iframe = iframePlugin
+        ? iframePlugin
+        : document.createElement("iframe")
       iframe.id = "record_plugin"
+
+      if (!iframePlugin) {
+        iframe.style.position = "fixed"
+        iframe.style.zIndex = "9000000000000000000"
+        iframe.allow = "microphone; camera; display-capture"
+        iframe.frameBorder = "none"
+        iframe.src = chrome.runtime.getURL("../html/iframe.html")
+        document.body.appendChild(iframe)
+      }
+
       iframe.style.backgroundColor = "rgba(0,0,0,0.1)"
       iframe.style.height = "100vh"
       iframe.style.width = "100vw"
-      iframe.style.position = "fixed"
       iframe.style.top = "0px"
       iframe.style.right = "0px"
-      iframe.style.zIndex = "9000000000000000000"
-      iframe.allow = "microphone; camera; display-capture"
-      iframe.frameBorder = "none"
-      iframe.src = chrome.runtime.getURL("../html/iframe.html")
-      document.body.appendChild(iframe)
       let opacity = 0.1
       let timer = setInterval(() => {
         if (opacity >= 0.6) {

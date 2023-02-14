@@ -1,37 +1,45 @@
 export default class Media {
-  static async getFlowVideo() {
+  constructor() {
+    this.screenStream = null
+    this.voiceStream = null
+  }
+
+  async getFlowVideo() {
     if (navigator.mediaDevices.getDisplayMedia) {
       try {
         // получаем поток
         const _screenStream = await navigator.mediaDevices.getDisplayMedia({
           video: true,
         })
-        return _screenStream
+        this.screenStream = _screenStream
       } catch (e) {
         console.log("getDisplayMedia", e)
-        return null
       }
     } else {
       alert("getDisplayMedia not supported")
-      return null
     }
   }
 
-  static async getFlowAudio() {
+  async getFlowAudio() {
     if (navigator.mediaDevices.getUserMedia) {
       try {
         // получаем поток
         const _voiceStream = await navigator.mediaDevices.getUserMedia({
           audio: true,
         })
-        return _voiceStream
+        this.voiceStream = _voiceStream
       } catch (e) {
         console.log("getUserMedia", e)
-        return null
       }
     } else {
       alert("getUserMedia not supported")
-      return null
+    }
+  }
+
+  resetScreenStream() {
+    if (this.screenStream?.getTracks) {
+      this.screenStream.getTracks().forEach((track) => track.stop())
+      this.screenStream = null
     }
   }
 }

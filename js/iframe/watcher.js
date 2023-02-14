@@ -18,6 +18,9 @@ const watch = (elements, initialState) => {
       case "recording":
         changeRecord(initialState)
         break
+      // case "screenStream":
+      //   console.log(watchedObject.screenStream)
+      //   break
       default:
         break
     }

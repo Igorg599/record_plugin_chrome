@@ -1,10 +1,11 @@
-import watch from "./wather.js"
+import watch from "./watcher.js"
 import Media from "./media.js"
 
 document.addEventListener("DOMContentLoaded", async function () {
+  const newMedia = new Media()
+  await newMedia.getFlowAudio()
+
   const initialState = {
-    screenStream: null,
-    voiceStream: await Media.getFlowAudio(),
     recording: false,
     UIState: {},
   }
@@ -19,14 +20,30 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   const watchState = watch(elements, initialState)
 
+  const stopRecord = () => {
+    newMedia.resetScreenStream()
+    watchState.recording = false
+    chrome.tabs.getCurrent((tab) => {
+      chrome.tabs.sendMessage(tab.id, "open")
+    })
+  }
+
   elements.buttonStart.addEventListener("click", async () => {
-    watchState.screenStream = await Media.getFlowVideo()
-    if (watchState.screenStream) {
+    await newMedia.getFlowVideo()
+    if (newMedia.screenStream) {
       chrome.tabs.getCurrent((tab) => {
         chrome.tabs.sendMessage(tab.id, "record")
       })
       watchState.recording = true
+      newMedia.screenStream.oninactive = () => {
+        stopRecord()
+      }
     }
+  })
+
+  elements.buttonStop.addEventListener("click", (e) => {
+    e.stopImmediatePropagation()
+    stopRecord()
   })
 
   elements.body.addEventListener("click", () => {
