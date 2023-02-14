@@ -4,7 +4,7 @@ import Media from "./media.js"
 document.addEventListener("DOMContentLoaded", async function () {
   const initialState = {
     screenStream: null,
-    voiceStream: null,
+    voiceStream: await Media.getFlowAudio(),
     recording: false,
     UIState: {},
   }
@@ -18,17 +18,16 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   const watchState = watch(elements, initialState)
 
-  watchState.voiceStream = await Media.getFlowAudio()
-  console.log(watchState.voiceStream)
-
   elements.buttonStart.addEventListener("click", async () => {
     watchState.screenStream = await Media.getFlowVideo()
   })
 
   elements.body.addEventListener("click", () => {
-    chrome.tabs.getCurrent((tab) => {
-      chrome.tabs.sendMessage(tab.id, "close")
-    })
+    if (!watchState.recording) {
+      chrome.tabs.getCurrent((tab) => {
+        chrome.tabs.sendMessage(tab.id, "close")
+      })
+    }
   })
 
   elements.container.addEventListener("click", (e) => {
