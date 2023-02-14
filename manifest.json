@@ -33,9 +33,11 @@
       ],
       "resources": [
         "html/popup.html",
-        "js/iframe.js",
+        "js/iframe/index.js",
         "html/iframe.html",
-        "libs/onChanhe.min.js"
+        "libs/onChanhe.min.js",
+        "js/iframe/watcher.js",
+        "js/iframe/media.js"
       ]
     }
   ],
