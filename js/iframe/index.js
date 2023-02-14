@@ -13,13 +13,20 @@ document.addEventListener("DOMContentLoaded", async function () {
     buttonStart: document.querySelector("#record_start"),
     buttonStop: document.querySelector("#record_stop"),
     body: document.querySelector("body"),
-    container: document.querySelector(".container"),
+    content: document.querySelector(".content"),
+    player: document.querySelector(".player"),
   }
 
   const watchState = watch(elements, initialState)
 
   elements.buttonStart.addEventListener("click", async () => {
     watchState.screenStream = await Media.getFlowVideo()
+    if (watchState.screenStream) {
+      chrome.tabs.getCurrent((tab) => {
+        chrome.tabs.sendMessage(tab.id, "record")
+      })
+      watchState.recording = true
+    }
   })
 
   elements.body.addEventListener("click", () => {
@@ -30,7 +37,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   })
 
-  elements.container.addEventListener("click", (e) => {
+  elements.content.addEventListener("click", (e) => {
     e.stopImmediatePropagation()
   })
 })

@@ -38,7 +38,15 @@ chrome.runtime.onMessage.addListener((msg, _, sendResponse) => {
       }, 25)
       break
     }
+    case "record": {
+      iframePlugin.style.backgroundColor = "rgba(0,0,0,0.0)"
+      iframePlugin.style.height = "70px"
+      iframePlugin.style.width = "190px"
+      iframePlugin.style.bottom = "0px"
+      iframePlugin.style.top = ""
+      break
+    }
     default:
-      throw new Error("Error message!")
+      throw new Error(`Error message - ${msg}!`)
   }
 })
