@@ -4,13 +4,13 @@ const watch = (elements, initialState, newMedia) => {
   const {
     switch: { microphoneTitle, microphone },
     errors,
-    body,
     content,
     player,
+    buttons: { play },
   } = elements
 
-  const changeRecord = (state) => {
-    if (state.recording) {
+  const changeGeneralView = (state) => {
+    if (!state.UIState.generalView) {
       content.style.display = "none"
       player.style.display = "block"
     } else {
@@ -35,14 +35,26 @@ const watch = (elements, initialState, newMedia) => {
     }
   }
 
+  const changeRecord = () => {
+    if (play.classList.contains("stop")) {
+      play.classList.remove("stop")
+    } else {
+      play.classList.add("stop")
+    }
+  }
+
   const watchedObject = onChange(initialState, (path, value) => {
     switch (path) {
-      case "recording": {
-        changeRecord(initialState)
+      case "UIState.generalView": {
+        changeGeneralView(initialState)
         break
       }
       case "UIState.switch.microphone": {
         changeVoiceStream(value)
+        break
+      }
+      case "recording": {
+        changeRecord()
         break
       }
       default:

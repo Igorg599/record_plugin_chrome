@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const initialState = {
     recording: false,
     UIState: {
+      generalView: true,
       switch: {
         microphone: false,
       },
@@ -19,8 +20,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     content: document.querySelector(".content"),
     player: document.querySelector(".player"),
     buttons: {
-      start: document.querySelector("#record_start"),
-      stop: document.querySelector("#record_stop"),
+      run: document.querySelector("#record_run"),
+      play: document.querySelector("#play"),
     },
     switch: {
       microphone: document.querySelector("#cb1"),
@@ -35,33 +36,35 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   const stopRecord = () => {
     newMedia.resetScreenStream()
-    watchState.recording = false
+    watchState.UIState.generalView = true
     chrome.tabs.getCurrent((tab) => {
       chrome.tabs.sendMessage(tab.id, "open")
     })
   }
 
-  elements.buttons.start.addEventListener("click", async () => {
+  elements.buttons.run.addEventListener("click", async () => {
     await newMedia.getFlowVideo()
     if (newMedia.screenStream) {
       chrome.tabs.getCurrent((tab) => {
         chrome.tabs.sendMessage(tab.id, "record")
       })
-      watchState.recording = true
+      watchState.UIState.generalView = false
       newMedia.screenStream.oninactive = () => {
         stopRecord()
       }
     }
   })
 
-  elements.buttons.stop.addEventListener("click", (e) => {
+  elements.buttons.play.addEventListener("click", (e) => {
     e.stopImmediatePropagation()
-    stopRecord()
-    // newMedia.resetVoiceStream()
+    watchState.recording = !watchState.recording
+    if (!elements.buttons.play.classList.contains("stop")) {
+      stopRecord()
+    }
   })
 
   elements.body.addEventListener("click", () => {
-    if (!watchState.recording) {
+    if (watchState.UIState.generalView) {
       chrome.tabs.getCurrent((tab) => {
         chrome.tabs.sendMessage(tab.id, "close")
       })
