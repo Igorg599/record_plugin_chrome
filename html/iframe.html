@@ -14,7 +14,15 @@
     </div>
     <p class="error_microphone">Not supported or permission denied</p>
     <button id="record_run">Начать запись</button>
-    <script type="module" src="../js/iframe/index.js"></script>
+    <video class="recording" autoplay muted width="0px" height="0px"></video>
+    <video
+      class="output"
+      autoplay
+      controls
+      width="200px"
+      height="200px"
+    ></video>
+    <a href="#" download="output.mp4" class="download">Download</a>
   </div>
   <div class="player">
     <div id="record">
@@ -22,4 +30,6 @@
       <div class="pulsating-circle" />
     </div>
   </div>
+
+  <script type="module" src="../js/iframe/index.js"></script>
 </body>

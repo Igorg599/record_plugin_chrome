@@ -29,6 +29,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     errors: {
       microphone: document.querySelector(".error_microphone"),
     },
+    video: document.querySelector(".recording"),
+    output: document.querySelector(".output"),
+    download: document.querySelector(".download"),
   }
 
   const watchState = watch(elements, initialState, newMedia)
@@ -59,6 +62,15 @@ document.addEventListener("DOMContentLoaded", async function () {
     watchState.recording = !watchState.recording
     if (!elements.buttons.play.classList.contains("stop")) {
       stopRecord()
+      if (newMedia.mediaRecorder) {
+        newMedia.mediaRecorder.stop()
+      }
+      newMedia.resetMediaRecorder()
+    } else {
+      newMedia.getMediaRecorder(elements, newMedia)
+      if (newMedia.mediaRecorder) {
+        newMedia.mediaRecorder.start()
+      }
     }
   })
 
