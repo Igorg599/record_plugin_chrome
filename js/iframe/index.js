@@ -3,12 +3,11 @@ import Media from "./media.js"
 
 document.addEventListener("DOMContentLoaded", async function () {
   const newMedia = new Media()
-  // await newMedia.getFlowAudio()
 
   const initialState = {
     recording: false,
     UIState: {
-      generalView: true,
+      wiewIframe: "control",
       switch: {
         microphone: false,
       },
@@ -17,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   const elements = {
     body: document.querySelector("body"),
-    content: document.querySelector(".content"),
+    control: document.querySelector(".control"),
     player: document.querySelector(".player"),
     buttons: {
       run: document.querySelector("#record_run"),
@@ -36,7 +35,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   const stopRecord = () => {
     newMedia.resetScreenStream()
-    watchState.UIState.generalView = true
+    watchState.UIState.wiewIframe = "control"
     chrome.tabs.getCurrent((tab) => {
       chrome.tabs.sendMessage(tab.id, "open")
     })
@@ -48,7 +47,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       chrome.tabs.getCurrent((tab) => {
         chrome.tabs.sendMessage(tab.id, "record")
       })
-      watchState.UIState.generalView = false
+      watchState.UIState.wiewIframe = "player"
       newMedia.screenStream.oninactive = () => {
         stopRecord()
       }
@@ -64,14 +63,14 @@ document.addEventListener("DOMContentLoaded", async function () {
   })
 
   elements.body.addEventListener("click", () => {
-    if (watchState.UIState.generalView) {
+    if (watchState.UIState.wiewIframe === "control") {
       chrome.tabs.getCurrent((tab) => {
         chrome.tabs.sendMessage(tab.id, "close")
       })
     }
   })
 
-  elements.content.addEventListener("click", (e) => {
+  elements.control.addEventListener("click", (e) => {
     e.stopImmediatePropagation()
   })
 

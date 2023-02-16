@@ -4,17 +4,17 @@ const watch = (elements, initialState, newMedia) => {
   const {
     switch: { microphoneTitle, microphone },
     errors,
-    content,
+    control,
     player,
     buttons: { play },
   } = elements
 
-  const changeGeneralView = (state) => {
-    if (!state.UIState.generalView) {
-      content.style.display = "none"
+  const changeViewUIframe = (state) => {
+    if (state.UIState.wiewIframe === "player") {
+      control.style.display = "none"
       player.style.display = "block"
     } else {
-      content.style.display = "block"
+      control.style.display = "block"
       player.style.display = "none"
     }
   }
@@ -45,8 +45,8 @@ const watch = (elements, initialState, newMedia) => {
 
   const watchedObject = onChange(initialState, (path, value) => {
     switch (path) {
-      case "UIState.generalView": {
-        changeGeneralView(initialState)
+      case "UIState.wiewIframe": {
+        changeViewUIframe(initialState)
         break
       }
       case "UIState.switch.microphone": {
