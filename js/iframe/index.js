@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   const initialState = {
     recording: false,
+    language: defaultLanguage,
     UIState: {
       wiewIframe: "control",
       switch: {
@@ -35,6 +36,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     switch: {
       microphone: document.querySelector("#cb1"),
       microphoneTitle: document.querySelector(".switch_titleMicrophone"),
+      language: document.querySelector("#language-toggle"),
     },
     errors: {
       microphone: document.querySelector(".error_microphone"),
@@ -44,7 +46,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     download: document.querySelector(".download"),
   }
 
-  const watchState = watch(elements, initialState, newMedia)
+  const watchState = watch(elements, initialState, newMedia, i18nInstance)
 
   const stopRecord = () => {
     newMedia.resetScreenStream()
@@ -102,5 +104,13 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   elements.switch.microphone.addEventListener("change", (e) => {
     watchState.UIState.switch.microphone = e.target.checked
+  })
+
+  elements.switch.language.addEventListener("change", (e) => {
+    if (e.target.checked) {
+      watchState.language = "en"
+    } else {
+      watchState.language = "ru"
+    }
   })
 })

@@ -1,7 +1,7 @@
 @import "./extra/switch.css";
 @import "./extra/pulse.css";
 @import "./extra/playButton.css";
-
+@import "./extra/switchLang.css";
 
 body {
   font-family: "Bebas Neue", cursive;
@@ -37,6 +37,7 @@ button {
 }
 
 .switch_titleMicrophone {
+  font-family: "Arial";
   font-size: 16px;
   margin: 0;
 }
@@ -57,6 +58,7 @@ button {
 
 h2 {
   text-align: center;
+  margin-top: 7px;
 }
 
 #record_run {

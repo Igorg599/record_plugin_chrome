@@ -1,6 +1,25 @@
 import onChange from "../../libs/onChanhe.min.js"
 
-const watch = (elements, initialState, newMedia) => {
+const renderLangElements = (elements, i18nInstance, initialState) => {
+  const {
+    switch: { microphoneTitle, language },
+    buttons: { run },
+    download,
+    errors: { microphone },
+  } = elements
+
+  if (initialState?.language === "en") {
+    language.checked = true
+  }
+  microphoneTitle.textContent = i18nInstance.t("microphone.on")
+  download.textContent = i18nInstance.t("download")
+  run.textContent = i18nInstance.t("start")
+  microphone.textContent = i18nInstance.t("errors.microphone")
+}
+
+const watch = (elements, initialState, newMedia, i18nInstance) => {
+  renderLangElements(elements, i18nInstance, initialState)
+
   const {
     switch: { microphoneTitle, microphone },
     errors,
@@ -23,7 +42,7 @@ const watch = (elements, initialState, newMedia) => {
     if (value) {
       await newMedia.getFlowAudio()
       if (newMedia.voiceStream) {
-        microphoneTitle.textContent = "Выключить микрофон"
+        microphoneTitle.textContent = i18nInstance.t("microphone.off")
       } else {
         microphone.checked = false
         microphone.disabled = true
@@ -31,7 +50,7 @@ const watch = (elements, initialState, newMedia) => {
       }
     } else {
       newMedia.resetVoiceStream()
-      microphoneTitle.textContent = "Включить микрофон"
+      microphoneTitle.textContent = i18nInstance.t("microphone.on")
     }
   }
 
@@ -56,6 +75,11 @@ const watch = (elements, initialState, newMedia) => {
       case "recording": {
         changeRecord()
         break
+      }
+      case "language": {
+        i18nInstance
+          .changeLanguage(value)
+          .then(() => renderLangElements(elements, i18nInstance))
       }
       default:
         break
