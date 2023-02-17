@@ -5,7 +5,7 @@ export default {
       off: "Turn off the microphone",
     },
     download: "Download record",
-    start: "Start Recording",
+    start: "Go to recording mode",
     errors: {
       microphone: "Not supported or permission denied",
     },

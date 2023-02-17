@@ -2,10 +2,11 @@ import "../../libs/i18next.min.js"
 import watch from "./watcher.js"
 import Media from "./media.js"
 import resources from "./locales/index.js"
+import lStorage from "./utils/localStorage.js"
 
 document.addEventListener("DOMContentLoaded", async function () {
   const newMedia = new Media()
-  const defaultLanguage = "en"
+  const defaultLanguage = lStorage.get("language_plugin") || "en"
 
   const i18nInstance = i18next.createInstance()
   await i18nInstance.init({
@@ -109,8 +110,10 @@ document.addEventListener("DOMContentLoaded", async function () {
   elements.switch.language.addEventListener("change", (e) => {
     if (e.target.checked) {
       watchState.language = "en"
+      lStorage.set("language_plugin", "en")
     } else {
       watchState.language = "ru"
+      lStorage.set("language_plugin", "ru")
     }
   })
 })

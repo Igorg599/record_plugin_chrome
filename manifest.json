@@ -33,15 +33,9 @@
       ],
       "resources": [
         "html/popup.html",
-        "js/iframe/index.js",
         "html/iframe.html",
         "libs/onChanhe.min.js",
-        "js/iframe/watcher.js",
-        "js/iframe/media.js",
-        "libs/i18next.min.js",
-        "js/iframe/locales/index.js",
-        "js/iframe/locales/ru.js",
-        "js/iframe/locales/en.js"
+        "libs/i18next.min.js"
       ]
     }
   ],
