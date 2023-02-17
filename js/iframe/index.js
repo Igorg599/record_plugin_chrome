@@ -1,8 +1,18 @@
+import "../../libs/i18next.min.js"
 import watch from "./watcher.js"
 import Media from "./media.js"
+import resources from "./locales/index.js"
 
 document.addEventListener("DOMContentLoaded", async function () {
   const newMedia = new Media()
+  const defaultLanguage = "en"
+
+  const i18nInstance = i18next.createInstance()
+  await i18nInstance.init({
+    lng: defaultLanguage,
+    debug: false,
+    resources,
+  })
 
   const initialState = {
     recording: false,
@@ -53,6 +63,10 @@ document.addEventListener("DOMContentLoaded", async function () {
       watchState.UIState.wiewIframe = "player"
       newMedia.screenStream.oninactive = () => {
         stopRecord()
+        if (newMedia.mediaRecorder) {
+          newMedia.mediaRecorder.stop()
+          newMedia.resetMediaRecorder()
+        }
       }
     }
   })
@@ -64,8 +78,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       stopRecord()
       if (newMedia.mediaRecorder) {
         newMedia.mediaRecorder.stop()
+        newMedia.resetMediaRecorder()
       }
-      newMedia.resetMediaRecorder()
     } else {
       newMedia.getMediaRecorder(elements, newMedia)
       if (newMedia.mediaRecorder) {
