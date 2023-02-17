@@ -86,3 +86,19 @@ h2 {
   justify-content: center;
 }
 
+.download {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.download_title {
+  font-size: 18px;
+}
+
+.download_icon {
+  width: 30px;
+  height: 30px;
+  margin-left: 11px;
+}
+

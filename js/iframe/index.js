@@ -44,7 +44,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     },
     video: document.querySelector(".recording"),
     output: document.querySelector(".output"),
-    download: document.querySelector(".download"),
+    downloadTitle: document.querySelector(".download_title"),
+    pulse: document.querySelector(".pulse"),
   }
 
   const watchState = watch(elements, initialState, newMedia, i18nInstance)

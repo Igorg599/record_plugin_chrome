@@ -4,7 +4,7 @@ const renderLangElements = (elements, i18nInstance, initialState) => {
   const {
     switch: { microphoneTitle, language },
     buttons: { run },
-    download,
+    downloadTitle,
     errors: { microphone },
   } = elements
 
@@ -12,7 +12,7 @@ const renderLangElements = (elements, i18nInstance, initialState) => {
     language.checked = true
   }
   microphoneTitle.textContent = i18nInstance.t("microphone.on")
-  download.textContent = i18nInstance.t("download")
+  downloadTitle.textContent = i18nInstance.t("download")
   run.textContent = i18nInstance.t("start")
   microphone.textContent = i18nInstance.t("errors.microphone")
 }
@@ -26,6 +26,7 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
     control,
     player,
     buttons: { play },
+    pulse,
   } = elements
 
   const changeViewUIframe = (state) => {
@@ -57,8 +58,10 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
   const changeRecord = () => {
     if (play.classList.contains("stop")) {
       play.classList.remove("stop")
+      pulse.classList.remove("pulsating-circle")
     } else {
       play.classList.add("stop")
+      pulse.classList.add("pulsating-circle")
     }
   }
 

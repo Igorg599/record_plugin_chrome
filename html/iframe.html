@@ -15,14 +15,11 @@
     <p class="error_microphone"></p>
     <button id="record_run"></button>
     <video class="recording" autoplay muted width="0px" height="0px"></video>
-    <video
-      class="output"
-      autoplay
-      controls
-      width="200px"
-      height="200px"
-    ></video>
-    <a href="#" download="output.mp4" class="download"></a>
+    <video class="output" controls width="0px" height="0px"></video>
+    <div class="download">
+      <a href="#" download="output.mp4" class="download_title"></a>
+      <img src="../icons/download.svg" alt="download" class="download_icon" />
+    </div>
     <div class="language">
       <div class="switch_language">
         <input
@@ -39,7 +36,7 @@
   <div class="player">
     <div id="record">
       <button id="play"></button>
-      <div class="pulsating-circle" />
+      <div class="pulse" />
     </div>
   </div>
 
