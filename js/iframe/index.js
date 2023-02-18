@@ -1,13 +1,12 @@
 import "../../libs/i18next.min.js"
-import "../../libs/shaka-player.min.js"
+import "../../libs/plyr-player.min.js"
 import watch from "./watcher.js"
 import Media from "./media.js"
 import resources from "./locales/index.js"
 import lStorage from "./utils/localStorage.js"
-import initVideoPlayer from "./utils/video_player.js"
 
 document.addEventListener("DOMContentLoaded", async function () {
-  initVideoPlayer()
+  const player = new Plyr("#video")
   const newMedia = new Media()
   const defaultLanguage = lStorage.get("language_plugin") || "en"
 

@@ -2,7 +2,7 @@
 @import "./extra/pulse.css";
 @import "./extra/playButton.css";
 @import "./extra/switchLang.css";
-@import "./extra/shaka-player.css";
+@import "./extra/plyr-player.css";
 
 body {
   font-family: "Bebas Neue", cursive;
