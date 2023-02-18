@@ -59,6 +59,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     video: document.querySelector(".recording"),
     output: document.querySelector(".output"),
     downloadTitle: document.querySelector(".download_title"),
+    download: document.querySelector(".download"),
     pulse: document.querySelector(".pulse"),
     gramophone: document.querySelector(".gramophone"),
   }

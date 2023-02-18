@@ -6,7 +6,6 @@ const renderLangElements = (elements, i18nInstance, initialState) => {
     buttons: { run },
     downloadTitle,
     errors: { microphone },
-    gramophone,
   } = elements
 
   if (initialState?.language === "en") {
@@ -29,9 +28,11 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
     buttons: { play },
     pulse,
     gramophone,
+    download,
   } = elements
 
   const changeViewUIframe = (state) => {
+    download.style.display = "flex"
     if (state.UIState.wiewIframe === "player") {
       gramophone.style.display = "none"
       control.style.display = "none"
