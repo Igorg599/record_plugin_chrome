@@ -38,7 +38,13 @@ export default class Media {
   }
 
   getMediaRecorder(elements) {
-    const { output, downloadTitle, video } = elements
+    const {
+      output,
+      downloadTitle,
+      video,
+      buttons: { play },
+      pulse,
+    } = elements
     let data = []
     video.srcObject = this.screenStream
     let combine
@@ -63,6 +69,8 @@ export default class Media {
       // Assign the url to the output video tag and anchor
       output.src = url
       downloadTitle.href = url
+      play.classList.remove("stop")
+      pulse.classList.remove("pulsating-circle")
     }
   }
 

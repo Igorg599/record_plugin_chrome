@@ -6,6 +6,7 @@ const renderLangElements = (elements, i18nInstance, initialState) => {
     buttons: { run },
     downloadTitle,
     errors: { microphone },
+    gramophone,
   } = elements
 
   if (initialState?.language === "en") {
@@ -86,6 +87,10 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
         i18nInstance
           .changeLanguage(value)
           .then(() => renderLangElements(elements, i18nInstance))
+      }
+      case "fullscreen": {
+        if (value) gramophone.style.transform = "none"
+        else gramophone.style.transform = "translate(-48vh, -30vh)"
       }
       default:
         break

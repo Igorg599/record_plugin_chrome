@@ -54,6 +54,14 @@ chrome.runtime.onMessage.addListener((msg, _, sendResponse) => {
       iframePlugin.style.paddingRight = "15px"
       break
     }
+    case "fullscreen": {
+      if (iframePlugin.style.paddingRight === "15px") {
+        iframePlugin.style.paddingRight = "0px"
+      } else {
+        iframePlugin.style.paddingRight = "15px"
+      }
+      break
+    }
     default:
       throw new Error(`Error message - ${msg}!`)
   }

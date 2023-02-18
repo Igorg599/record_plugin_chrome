@@ -6,7 +6,7 @@ import resources from "./locales/index.js"
 import lStorage from "./utils/localStorage.js"
 
 document.addEventListener("DOMContentLoaded", async function () {
-  new Plyr("#video", {
+  const player = new Plyr("#video", {
     controls: [
       "play-large",
       "play",
@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       "volume",
       "captions",
       "settings",
+      "fullscreen",
     ],
   })
   const newMedia = new Media()
@@ -30,6 +31,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const initialState = {
     recording: false,
     language: defaultLanguage,
+    fullscreen: false,
     UIState: {
       wiewIframe: "control",
       switch: {
@@ -68,6 +70,13 @@ document.addEventListener("DOMContentLoaded", async function () {
     watchState.UIState.wiewIframe = "control"
     chrome.tabs.getCurrent((tab) => {
       chrome.tabs.sendMessage(tab.id, "open")
+    })
+  }
+
+  const changeFullScreen = (value) => {
+    watchState.fullscreen = value
+    chrome.tabs.getCurrent((tab) => {
+      chrome.tabs.sendMessage(tab.id, "fullscreen")
     })
   }
 
@@ -133,5 +142,13 @@ document.addEventListener("DOMContentLoaded", async function () {
       watchState.language = "ru"
       lStorage.set("language_plugin", "ru")
     }
+  })
+
+  player.on("enterfullscreen", () => {
+    changeFullScreen(true)
+  })
+
+  player.on("exitfullscreen", () => {
+    changeFullScreen(false)
   })
 })
