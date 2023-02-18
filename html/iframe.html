@@ -1,6 +1,7 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="../css/iframe.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
   <div class="control">
@@ -15,7 +16,6 @@
     <p class="error_microphone"></p>
     <button id="record_run"></button>
     <video class="recording" autoplay muted width="0px" height="0px"></video>
-    <video class="output" controls width="0px" height="0px"></video>
     <div class="download">
       <a href="#" download="output.mp4" class="download_title"></a>
       <img src="../icons/download.svg" alt="download" class="download_icon" />
@@ -32,6 +32,15 @@
         <span class="off">en</span>
       </div>
     </div>
+  </div>
+  <div class="gramophone">
+    <video
+      id="video"
+      width="100%"
+      controls
+      height="100%"
+      class="output"
+    ></video>
   </div>
   <div class="player">
     <div id="record">

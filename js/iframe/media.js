@@ -38,7 +38,7 @@ export default class Media {
   }
 
   getMediaRecorder(elements) {
-    const { output, download, video } = elements
+    const { output, downloadTitle, video } = elements
     let data = []
     video.srcObject = this.screenStream
     let combine
@@ -62,7 +62,7 @@ export default class Media {
       let url = URL.createObjectURL(blobData)
       // Assign the url to the output video tag and anchor
       output.src = url
-      download.href = url
+      downloadTitle.href = url
     }
   }
 

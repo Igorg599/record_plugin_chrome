@@ -27,13 +27,16 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
     player,
     buttons: { play },
     pulse,
+    gramophone,
   } = elements
 
   const changeViewUIframe = (state) => {
     if (state.UIState.wiewIframe === "player") {
+      gramophone.style.display = "none"
       control.style.display = "none"
       player.style.display = "block"
     } else {
+      gramophone.style.display = "block"
       control.style.display = "block"
       player.style.display = "none"
     }

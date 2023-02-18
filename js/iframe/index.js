@@ -1,10 +1,13 @@
 import "../../libs/i18next.min.js"
+import "../../libs/shaka-player.min.js"
 import watch from "./watcher.js"
 import Media from "./media.js"
 import resources from "./locales/index.js"
 import lStorage from "./utils/localStorage.js"
+import initVideoPlayer from "./utils/video_player.js"
 
 document.addEventListener("DOMContentLoaded", async function () {
+  initVideoPlayer()
   const newMedia = new Media()
   const defaultLanguage = lStorage.get("language_plugin") || "en"
 
@@ -46,6 +49,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     output: document.querySelector(".output"),
     downloadTitle: document.querySelector(".download_title"),
     pulse: document.querySelector(".pulse"),
+    gramophone: document.querySelector(".gramophone"),
   }
 
   const watchState = watch(elements, initialState, newMedia, i18nInstance)
@@ -101,6 +105,10 @@ document.addEventListener("DOMContentLoaded", async function () {
   })
 
   elements.control.addEventListener("click", (e) => {
+    e.stopImmediatePropagation()
+  })
+
+  elements.gramophone.addEventListener("click", (e) => {
     e.stopImmediatePropagation()
   })
 
