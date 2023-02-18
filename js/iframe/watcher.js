@@ -32,13 +32,17 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
   } = elements
 
   const changeViewUIframe = (state) => {
-    download.style.display = "flex"
+    if (!state.emptyRecord) {
+      download.style.display = "flex"
+    }
     if (state.UIState.wiewIframe === "player") {
       gramophone.style.display = "none"
       control.style.display = "none"
       player.style.display = "block"
     } else {
-      gramophone.style.display = "block"
+      if (!state.emptyRecord) {
+        gramophone.style.display = "block"
+      }
       control.style.display = "block"
       player.style.display = "none"
     }
@@ -88,10 +92,12 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
         i18nInstance
           .changeLanguage(value)
           .then(() => renderLangElements(elements, i18nInstance))
+        break
       }
       case "fullscreen": {
         if (value) gramophone.style.transform = "none"
         else gramophone.style.transform = "translate(-48vh, -30vh)"
+        break
       }
       default:
         break

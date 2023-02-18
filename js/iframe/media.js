@@ -37,7 +37,7 @@ export default class Media {
     }
   }
 
-  getMediaRecorder(elements) {
+  getMediaRecorder(elements, state) {
     const {
       output,
       downloadTitle,
@@ -63,6 +63,9 @@ export default class Media {
     }
 
     this.mediaRecorder.onstop = () => {
+      if (data.length) {
+        state.emptyRecord = false
+      }
       let blobData = new Blob(data, { type: "video/mp4" })
       // Convert the blob data to a url
       let url = URL.createObjectURL(blobData)

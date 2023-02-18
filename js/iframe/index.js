@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     recording: false,
     language: defaultLanguage,
     fullscreen: false,
+    emptyRecord: true,
     UIState: {
       wiewIframe: "control",
       switch: {
@@ -67,10 +68,12 @@ document.addEventListener("DOMContentLoaded", async function () {
   const watchState = watch(elements, initialState, newMedia, i18nInstance)
 
   const stopRecord = () => {
-    newMedia.resetScreenStream()
-    watchState.UIState.wiewIframe = "control"
-    chrome.tabs.getCurrent((tab) => {
-      chrome.tabs.sendMessage(tab.id, "open")
+    setTimeout(() => {
+      newMedia.resetScreenStream()
+      watchState.UIState.wiewIframe = "control"
+      chrome.tabs.getCurrent((tab) => {
+        chrome.tabs.sendMessage(tab.id, "open")
+      })
     })
   }
 
@@ -89,11 +92,11 @@ document.addEventListener("DOMContentLoaded", async function () {
       })
       watchState.UIState.wiewIframe = "player"
       newMedia.screenStream.oninactive = () => {
-        stopRecord()
         if (newMedia.mediaRecorder) {
           newMedia.mediaRecorder.stop()
           newMedia.resetMediaRecorder()
         }
+        stopRecord()
       }
     }
   })
@@ -102,13 +105,13 @@ document.addEventListener("DOMContentLoaded", async function () {
     e.stopImmediatePropagation()
     watchState.recording = !watchState.recording
     if (!elements.buttons.play.classList.contains("stop")) {
-      stopRecord()
       if (newMedia.mediaRecorder) {
         newMedia.mediaRecorder.stop()
         newMedia.resetMediaRecorder()
       }
+      stopRecord()
     } else {
-      newMedia.getMediaRecorder(elements)
+      newMedia.getMediaRecorder(elements, watchState)
       if (newMedia.mediaRecorder) {
         newMedia.mediaRecorder.start()
       }
