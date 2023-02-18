@@ -6,7 +6,17 @@ import resources from "./locales/index.js"
 import lStorage from "./utils/localStorage.js"
 
 document.addEventListener("DOMContentLoaded", async function () {
-  const player = new Plyr("#video")
+  new Plyr("#video", {
+    controls: [
+      "play-large",
+      "play",
+      "progress",
+      "current-time",
+      "volume",
+      "captions",
+      "settings",
+    ],
+  })
   const newMedia = new Media()
   const defaultLanguage = lStorage.get("language_plugin") || "en"
 
@@ -88,7 +98,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         newMedia.resetMediaRecorder()
       }
     } else {
-      newMedia.getMediaRecorder(elements, newMedia)
+      newMedia.getMediaRecorder(elements)
       if (newMedia.mediaRecorder) {
         newMedia.mediaRecorder.start()
       }
