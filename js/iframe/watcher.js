@@ -2,7 +2,7 @@ import onChange from "../../libs/onChanhe.min.js"
 
 const renderLangElements = (elements, i18nInstance, initialState) => {
   const {
-    switch: { microphoneTitle, language },
+    switch: { microphoneTitle, language, cameraTitle },
     buttons: { run, play },
     downloadTitle,
     errors: { microphone },
@@ -16,13 +16,14 @@ const renderLangElements = (elements, i18nInstance, initialState) => {
   run.textContent = i18nInstance.t("start")
   microphone.textContent = i18nInstance.t("errors.microphone")
   play.textContent = i18nInstance.t("buttons.start")
+  cameraTitle.textContent = i18nInstance.t("camera.on")
 }
 
 const watch = (elements, initialState, newMedia, i18nInstance) => {
   renderLangElements(elements, i18nInstance, initialState)
 
   const {
-    switch: { microphoneTitle, microphone },
+    switch: { microphoneTitle, microphone, cameraTitle },
     errors,
     control,
     player,
@@ -30,6 +31,7 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
     pulse,
     gramophone,
     download,
+    camera,
   } = elements
 
   const changeViewUIframe = (state) => {
@@ -65,6 +67,27 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
     }
   }
 
+  const changeCameraStream = async (value) => {
+    if (value) {
+      cameraTitle.textContent = i18nInstance.t("camera.off")
+      if (newMedia.cameraStream) {
+        camera.requestPictureInPicture()
+      } else {
+        await newMedia.getFlowCamera()
+        camera.srcObject = newMedia.cameraStream
+        camera.play()
+        camera.onloadedmetadata = function () {
+          camera.requestPictureInPicture()
+        }
+      }
+    } else {
+      if (document.pictureInPictureElement) {
+        document.exitPictureInPicture()
+      }
+      cameraTitle.textContent = i18nInstance.t("camera.on")
+    }
+  }
+
   const changeRecord = () => {
     if (play.classList.contains("is-clicked")) {
       play.classList.remove("is-clicked")
@@ -85,6 +108,10 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
       }
       case "UIState.switch.microphone": {
         changeVoiceStream(value)
+        break
+      }
+      case "UIState.switch.camera": {
+        changeCameraStream(value)
         break
       }
       case "recording": {

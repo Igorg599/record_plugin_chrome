@@ -2,6 +2,7 @@ export default class Media {
   constructor() {
     this.screenStream = null
     this.voiceStream = null
+    this.cameraStream = null
     this.mediaRecorder = null
   }
 
@@ -29,6 +30,22 @@ export default class Media {
           audio: true,
         })
         this.voiceStream = _voiceStream
+      } catch (e) {
+        console.log("getUserMedia", e)
+      }
+    } else {
+      alert("getUserMedia not supported")
+    }
+  }
+
+  async getFlowCamera() {
+    if (navigator.mediaDevices.getUserMedia) {
+      try {
+        // получаем поток
+        const _cameraStream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: "user" },
+        })
+        this.cameraStream = _cameraStream
       } catch (e) {
         console.log("getUserMedia", e)
       }

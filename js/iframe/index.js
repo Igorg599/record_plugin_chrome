@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       wiewIframe: "control",
       switch: {
         microphone: false,
+        camera: false,
       },
     },
   }
@@ -52,12 +53,15 @@ document.addEventListener("DOMContentLoaded", async function () {
     switch: {
       microphone: document.querySelector("#cb1"),
       microphoneTitle: document.querySelector(".switch_titleMicrophone"),
+      camera: document.querySelector("#cb2"),
+      cameraTitle: document.querySelector(".switch_titleCamera"),
       language: document.querySelector("#language-toggle"),
     },
     errors: {
       microphone: document.querySelector(".error_microphone"),
     },
     video: document.querySelector(".recording"),
+    camera: document.querySelector(".recording_camera"),
     output: document.querySelector(".output"),
     downloadTitle: document.querySelector(".download_title"),
     download: document.querySelector(".download"),
@@ -136,6 +140,10 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   elements.switch.microphone.addEventListener("change", (e) => {
     watchState.UIState.switch.microphone = e.target.checked
+  })
+
+  elements.switch.camera.addEventListener("change", (e) => {
+    watchState.UIState.switch.camera = e.target.checked
   })
 
   elements.switch.language.addEventListener("change", (e) => {
