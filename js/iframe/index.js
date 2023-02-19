@@ -147,6 +147,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     watchState.UIState.switch.camera = e.target.checked
   })
 
+  elements.camera.addEventListener("leavepictureinpicture", () => {
+    watchState.UIState.switch.camera = false
+  })
+
   elements.switch.language.addEventListener("change", (e) => {
     if (e.target.checked) {
       watchState.language = "en"

@@ -69,6 +69,9 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
   }
 
   const changeCameraStream = async (value) => {
+    if (cameraSwitch.checked !== value) {
+      cameraSwitch.checked = value
+    }
     if (value) {
       cameraTitle.textContent = i18nInstance.t("camera.off")
       if (newMedia.cameraStream) {
