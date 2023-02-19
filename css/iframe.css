@@ -36,6 +36,7 @@ button {
   height: 30px;
   justify-content: space-between;
   align-items: center;
+  margin-top: 5px;
 }
 
 .switch_titleMicrophone,
@@ -45,14 +46,14 @@ button {
   margin: 0;
 }
 
-.error_microphone {
+.error_switch {
   display: none;
   color: #d32f2f;
   width: 100%;
   text-align: center;
   line-height: 10px;
   font-size: 10px;
-  margin: 0;
+  margin: -3px 0 0 0;
 }
 
 .player {

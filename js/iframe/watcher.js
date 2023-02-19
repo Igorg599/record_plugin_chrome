@@ -5,7 +5,7 @@ const renderLangElements = (elements, i18nInstance, initialState) => {
     switch: { microphoneTitle, language, cameraTitle },
     buttons: { run, play },
     downloadTitle,
-    errors: { microphone },
+    errors: { microphoneErr, cameraErr },
   } = elements
 
   if (initialState?.language === "en") {
@@ -14,7 +14,8 @@ const renderLangElements = (elements, i18nInstance, initialState) => {
   microphoneTitle.textContent = i18nInstance.t("microphone.on")
   downloadTitle.textContent = i18nInstance.t("download")
   run.textContent = i18nInstance.t("start")
-  microphone.textContent = i18nInstance.t("errors.microphone")
+  microphoneErr.textContent = i18nInstance.t("errors.switch")
+  cameraErr.textContent = i18nInstance.t("errors.switch")
   play.textContent = i18nInstance.t("buttons.start")
   cameraTitle.textContent = i18nInstance.t("camera.on")
 }
@@ -23,7 +24,7 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
   renderLangElements(elements, i18nInstance, initialState)
 
   const {
-    switch: { microphoneTitle, microphone, cameraTitle },
+    switch: { microphoneTitle, microphone, cameraTitle, cameraSwitch },
     errors,
     control,
     player,
@@ -59,7 +60,7 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
       } else {
         microphone.checked = false
         microphone.disabled = true
-        errors.microphone.style.display = "block"
+        errors.microphoneErr.style.display = "block"
       }
     } else {
       newMedia.resetVoiceStream()
@@ -74,10 +75,16 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
         camera.requestPictureInPicture()
       } else {
         await newMedia.getFlowCamera()
-        camera.srcObject = newMedia.cameraStream
-        camera.play()
-        camera.onloadedmetadata = function () {
-          camera.requestPictureInPicture()
+        if (newMedia.cameraStream) {
+          camera.srcObject = newMedia.cameraStream
+          camera.play()
+          camera.onloadedmetadata = function () {
+            camera.requestPictureInPicture()
+          }
+        } else {
+          errors.cameraErr.style.display = "block"
+          cameraSwitch.checked = false
+          cameraSwitch.disabled = true
         }
       }
     } else {

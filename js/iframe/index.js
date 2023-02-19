@@ -53,12 +53,13 @@ document.addEventListener("DOMContentLoaded", async function () {
     switch: {
       microphone: document.querySelector("#cb1"),
       microphoneTitle: document.querySelector(".switch_titleMicrophone"),
-      camera: document.querySelector("#cb2"),
+      cameraSwitch: document.querySelector("#cb2"),
       cameraTitle: document.querySelector(".switch_titleCamera"),
       language: document.querySelector("#language-toggle"),
     },
     errors: {
-      microphone: document.querySelector(".error_microphone"),
+      microphoneErr: document.querySelector(".err_microphone"),
+      cameraErr: document.querySelector(".err_camera"),
     },
     video: document.querySelector(".recording"),
     camera: document.querySelector(".recording_camera"),
@@ -142,7 +143,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     watchState.UIState.switch.microphone = e.target.checked
   })
 
-  elements.switch.camera.addEventListener("change", (e) => {
+  elements.switch.cameraSwitch.addEventListener("change", (e) => {
     watchState.UIState.switch.camera = e.target.checked
   })
 
