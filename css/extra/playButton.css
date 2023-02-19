@@ -1,24 +1,66 @@
 #play {
-  border: 0;
-  background: transparent;
-  box-sizing: border-box;
-  width: 0;
-  height: 20px;
-  border-color: transparent transparent transparent #6de00e;
-  transition: 100ms all ease;
-  cursor: pointer;
-  border-style: solid;
-  border-width: 10px 0 10px 16px;
+  text-decoration: none;
+  display: block;
+  position: relative;
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(to bottom, hotpink 0%, tomato 100%);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, .3);
+  border-radius: 50%;
+  line-height: 70px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
 }
 
-#play.stop {
-  border-width: 0px 0 0px 20px;
-  border-color: transparent transparent transparent #7c0000;
-}
-#play.stop:hover {
-  border-color: transparent transparent transparent #b30505;
+#play::before {
+  display: block;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: black;
+  opacity: 0;
+  content: '';
+  animation: pulse 1s infinite;
 }
 
-#play:hover {
-  border-color: transparent transparent transparent #c6f1d1;
+#play:hover::before {
+  animation: none;
+  opacity: .4;
+  transform: scale(1.3);
+}
+
+#play.is-clicked {
+  background: linear-gradient(to bottom, gray 0%, dimgray 100%);
+}
+
+#play.is-clicked:before {
+  animation: blastOut 1s;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+    opacity: .4;
+  }
+
+  to {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+@keyframes blastOut {
+  from {
+    transform: scale(0.9);
+    opacity: .4;
+  }
+
+  to {
+    transform: scale(1.5);
+    opacity: 0;
+  }
 }

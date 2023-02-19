@@ -9,5 +9,9 @@ export default {
     errors: {
       microphone: "Not supported or permission denied",
     },
+    buttons: {
+      start: "Start",
+      stop: "Stop",
+    },
   },
 }

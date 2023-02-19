@@ -3,7 +3,7 @@ import onChange from "../../libs/onChanhe.min.js"
 const renderLangElements = (elements, i18nInstance, initialState) => {
   const {
     switch: { microphoneTitle, language },
-    buttons: { run },
+    buttons: { run, play },
     downloadTitle,
     errors: { microphone },
   } = elements
@@ -15,6 +15,7 @@ const renderLangElements = (elements, i18nInstance, initialState) => {
   downloadTitle.textContent = i18nInstance.t("download")
   run.textContent = i18nInstance.t("start")
   microphone.textContent = i18nInstance.t("errors.microphone")
+  play.textContent = i18nInstance.t("buttons.start")
 }
 
 const watch = (elements, initialState, newMedia, i18nInstance) => {
@@ -65,12 +66,14 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
   }
 
   const changeRecord = () => {
-    if (play.classList.contains("stop")) {
-      play.classList.remove("stop")
+    if (play.classList.contains("is-clicked")) {
+      play.classList.remove("is-clicked")
       pulse.classList.remove("pulsating-circle")
+      play.textContent = i18nInstance.t("buttons.start")
     } else {
-      play.classList.add("stop")
+      play.classList.add("is-clicked")
       pulse.classList.add("pulsating-circle")
+      play.textContent = i18nInstance.t("buttons.stop")
     }
   }
 

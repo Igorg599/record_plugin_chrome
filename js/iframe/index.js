@@ -104,14 +104,14 @@ document.addEventListener("DOMContentLoaded", async function () {
   elements.buttons.play.addEventListener("click", (e) => {
     e.stopImmediatePropagation()
     watchState.recording = !watchState.recording
-    if (!elements.buttons.play.classList.contains("stop")) {
+    if (!elements.buttons.play.classList.contains("is-clicked")) {
       if (newMedia.mediaRecorder) {
         newMedia.mediaRecorder.stop()
         newMedia.resetMediaRecorder()
       }
       stopRecord()
     } else {
-      newMedia.getMediaRecorder(elements, watchState)
+      newMedia.getMediaRecorder(elements, watchState, i18nInstance)
       if (newMedia.mediaRecorder) {
         newMedia.mediaRecorder.start()
       }

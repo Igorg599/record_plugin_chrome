@@ -47,8 +47,8 @@ chrome.runtime.onMessage.addListener((msg, _, sendResponse) => {
     }
     case "record": {
       iframePlugin.style.backgroundColor = "rgba(0,0,0,0.0)"
-      iframePlugin.style.height = "60px"
-      iframePlugin.style.width = "120px"
+      iframePlugin.style.height = "100px"
+      iframePlugin.style.width = "150px"
       iframePlugin.style.bottom = "0px"
       iframePlugin.style.top = ""
       iframePlugin.style.paddingRight = "15px"

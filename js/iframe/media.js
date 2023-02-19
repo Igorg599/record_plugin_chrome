@@ -37,7 +37,7 @@ export default class Media {
     }
   }
 
-  getMediaRecorder(elements, state) {
+  getMediaRecorder(elements, state, i18nInstance) {
     const {
       output,
       downloadTitle,
@@ -72,7 +72,8 @@ export default class Media {
       // Assign the url to the output video tag and anchor
       output.src = url
       downloadTitle.href = url
-      play.classList.remove("stop")
+      play.classList.remove("is-clicked")
+      play.textContent = i18nInstance.t("buttons.start")
       pulse.classList.remove("pulsating-circle")
     }
   }

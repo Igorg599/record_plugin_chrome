@@ -9,5 +9,9 @@ export default {
     errors: {
       microphone: "Не поддерживается или отказано в разрешении",
     },
+    buttons: {
+      start: "Старт",
+      stop: "Стоп",
+    },
   },
 }
