@@ -5,12 +5,12 @@ export default {
       off: "Turn off the microphone",
     },
     camera: {
-      on: "Enable global front camera",
-      off: "Turn off global front camera",
+      on: "Enable camera outside of browser",
+      off: "Turn off the camera outside of browser",
     },
     cameraLocal: {
-      on: "Enable front camera for current page",
-      off: "Turn off the front camera for the current page",
+      on: "Enable camera in browser",
+      off: "Turn off the camera in the browser",
     },
     download: "Download record",
     start: "Go to recording mode",
