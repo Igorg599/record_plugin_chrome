@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       switch: {
         microphone: false,
         camera: false,
+        cameraLocalSwitch: false,
       },
     },
   }
@@ -55,11 +56,14 @@ document.addEventListener("DOMContentLoaded", async function () {
       microphoneTitle: document.querySelector(".switch_titleMicrophone"),
       cameraSwitch: document.querySelector("#cb2"),
       cameraTitle: document.querySelector(".switch_titleCamera"),
+      cameraLocalSwitch: document.querySelector("#cb3"),
+      cameraLocalTitle: document.querySelector(".switch_titleCameraLocal"),
       language: document.querySelector("#language-toggle"),
     },
     errors: {
       microphoneErr: document.querySelector(".err_microphone"),
       cameraErr: document.querySelector(".err_camera"),
+      cameraLocalErr: document.querySelector(".err_cameraLocal"),
     },
     video: document.querySelector(".recording"),
     camera: document.querySelector(".recording_camera"),
@@ -84,9 +88,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   const changeFullScreen = (value) => {
     watchState.fullscreen = value
-    chrome.tabs.getCurrent((tab) => {
-      chrome.tabs.sendMessage(tab.id, "fullscreen")
-    })
   }
 
   elements.buttons.run.addEventListener("click", async () => {
@@ -145,6 +146,10 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   elements.switch.cameraSwitch.addEventListener("change", (e) => {
     watchState.UIState.switch.camera = e.target.checked
+  })
+
+  elements.switch.cameraLocalSwitch.addEventListener("change", (e) => {
+    watchState.UIState.switch.cameraLocalSwitch = e.target.checked
   })
 
   elements.camera.addEventListener("leavepictureinpicture", () => {

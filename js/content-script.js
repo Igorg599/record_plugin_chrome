@@ -22,7 +22,7 @@ chrome.runtime.onMessage.addListener((msg, _, sendResponse) => {
 
       if (!iframePlugin) {
         iframe.style.position = "fixed"
-        iframe.style.zIndex = "9000000000000000000"
+        iframe.style.zIndex = "90000"
         iframe.allow = "microphone; camera; display-capture"
         iframe.frameBorder = "none"
         iframe.src = chrome.runtime.getURL("../html/iframe.html")
@@ -51,15 +51,6 @@ chrome.runtime.onMessage.addListener((msg, _, sendResponse) => {
       iframePlugin.style.width = "150px"
       iframePlugin.style.bottom = "0px"
       iframePlugin.style.top = ""
-      iframePlugin.style.paddingRight = "15px"
-      break
-    }
-    case "fullscreen": {
-      if (iframePlugin.style.paddingRight === "15px") {
-        iframePlugin.style.paddingRight = "0px"
-      } else {
-        iframePlugin.style.paddingRight = "15px"
-      }
       break
     }
     default:

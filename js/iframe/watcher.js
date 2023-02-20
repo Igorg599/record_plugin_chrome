@@ -2,10 +2,10 @@ import onChange from "../../libs/onChanhe.min.js"
 
 const renderLangElements = (elements, i18nInstance, initialState) => {
   const {
-    switch: { microphoneTitle, language, cameraTitle },
+    switch: { microphoneTitle, language, cameraTitle, cameraLocalTitle },
     buttons: { run, play },
     downloadTitle,
-    errors: { microphoneErr, cameraErr },
+    errors: { microphoneErr, cameraErr, cameraLocalErr },
   } = elements
 
   if (initialState?.language === "en") {
@@ -16,8 +16,10 @@ const renderLangElements = (elements, i18nInstance, initialState) => {
   run.textContent = i18nInstance.t("start")
   microphoneErr.textContent = i18nInstance.t("errors.switch")
   cameraErr.textContent = i18nInstance.t("errors.switch")
+  cameraLocalErr.textContent = i18nInstance.t("errors.switch")
   play.textContent = i18nInstance.t("buttons.start")
   cameraTitle.textContent = i18nInstance.t("camera.on")
+  cameraLocalTitle.textContent = i18nInstance.t("cameraLocal.on")
 }
 
 const watch = (elements, initialState, newMedia, i18nInstance) => {

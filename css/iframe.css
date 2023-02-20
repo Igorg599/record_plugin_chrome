@@ -36,13 +36,14 @@ button {
   height: 30px;
   justify-content: space-between;
   align-items: center;
-  margin-top: 5px;
+  margin-top: 15px;
 }
 
 .switch_titleMicrophone,
-.switch_titleCamera {
+.switch_titleCamera,
+.switch_titleCameraLocal {
   font-family: "Arial";
-  font-size: 16px;
+  font-size: 14px;
   margin: 0;
 }
 
