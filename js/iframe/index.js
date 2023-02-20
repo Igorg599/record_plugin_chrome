@@ -127,6 +127,9 @@ document.addEventListener("DOMContentLoaded", async function () {
   elements.body.addEventListener("click", () => {
     if (watchState.UIState.wiewIframe === "control") {
       chrome.tabs.getCurrent((tab) => {
+        chrome.tabs.sendMessage(tab.id, "offCamera")
+      })
+      chrome.tabs.getCurrent((tab) => {
         chrome.tabs.sendMessage(tab.id, "close")
       })
     }
