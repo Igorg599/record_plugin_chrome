@@ -26,7 +26,13 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
   renderLangElements(elements, i18nInstance, initialState)
 
   const {
-    switch: { microphoneTitle, microphone, cameraTitle, cameraSwitch },
+    switch: {
+      microphoneTitle,
+      microphone,
+      cameraTitle,
+      cameraSwitch,
+      cameraLocalSwitch,
+    },
     errors,
     control,
     player,
@@ -100,6 +106,25 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
     }
   }
 
+  const changeCameraLocalStream = (value) => {
+    if (value) {
+      chrome.tabs.getCurrent((tab) => {
+        chrome.tabs.sendMessage(tab.id, "onCamera")
+      })
+      chrome.runtime.onMessage.addListener(function (request) {
+        if (request === "cameraError") {
+          cameraLocalSwitch.checked = false
+          cameraLocalSwitch.disabled = true
+          errors.cameraLocalErr.style.display = "block"
+        }
+      })
+    } else {
+      chrome.tabs.getCurrent((tab) => {
+        chrome.tabs.sendMessage(tab.id, "offCamera")
+      })
+    }
+  }
+
   const changeRecord = () => {
     if (play.classList.contains("is-clicked")) {
       play.classList.remove("is-clicked")
@@ -124,6 +149,14 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
       }
       case "UIState.switch.camera": {
         changeCameraStream(value)
+        break
+      }
+      case "UIState.switch.camera": {
+        changeCameraStream(value)
+        break
+      }
+      case "UIState.switch.cameraLocal": {
+        changeCameraLocalStream(value)
         break
       }
       case "recording": {

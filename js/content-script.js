@@ -15,34 +15,11 @@ chrome.runtime.onMessage.addListener((msg, _, sendResponse) => {
       break
     }
     case "open": {
-      const iframe = iframePlugin
-        ? iframePlugin
-        : document.createElement("iframe")
-      iframe.id = "record_plugin"
-
-      if (!iframePlugin) {
-        iframe.style.position = "fixed"
-        iframe.style.zIndex = "90000"
-        iframe.allow = "microphone; camera; display-capture"
-        iframe.frameBorder = "none"
-        iframe.src = chrome.runtime.getURL("../html/iframe.html")
-        document.body.appendChild(iframe)
-      }
-
-      iframe.style.backgroundColor = "rgba(0,0,0,0.1)"
-      iframe.style.height = "100vh"
-      iframe.style.width = "100vw"
-      iframe.style.top = "0px"
-      iframe.style.right = "0px"
-      let opacity = 0.1
-      let timer = setInterval(() => {
-        if (opacity >= 0.6) {
-          clearInterval(timer)
-          return
-        }
-        opacity += 0.02
-        iframe.style.backgroundColor = `rgba(0,0,0,${opacity})`
-      }, 25)
+      ;(async () => {
+        const src = chrome.runtime.getURL("js/renderContent/iframe.js")
+        const contentScript = await import(src)
+        contentScript.renderIframe(iframePlugin)
+      })()
       break
     }
     case "record": {
@@ -51,6 +28,18 @@ chrome.runtime.onMessage.addListener((msg, _, sendResponse) => {
       iframePlugin.style.width = "150px"
       iframePlugin.style.bottom = "0px"
       iframePlugin.style.top = ""
+      break
+    }
+    case "onCamera": {
+      ;(async () => {
+        const src = chrome.runtime.getURL("js/renderContent/camera.js")
+        const contentScript = await import(src)
+        contentScript.renderCamera()
+      })()
+      break
+    }
+    case "offCamera": {
+      document.querySelector("#container_camera").remove()
       break
     }
     default:

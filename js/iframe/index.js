@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       switch: {
         microphone: false,
         camera: false,
-        cameraLocalSwitch: false,
+        cameraLocal: false,
       },
     },
   }
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   })
 
   elements.switch.cameraLocalSwitch.addEventListener("change", (e) => {
-    watchState.UIState.switch.cameraLocalSwitch = e.target.checked
+    watchState.UIState.switch.cameraLocal = e.target.checked
   })
 
   elements.camera.addEventListener("leavepictureinpicture", () => {

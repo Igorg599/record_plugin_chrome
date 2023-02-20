@@ -34,8 +34,8 @@
       "resources": [
         "html/popup.html",
         "html/iframe.html",
-        "libs/onChanhe.min.js",
-        "libs/i18next.min.js"
+        "js/renderContent/camera.js",
+        "js/renderContent/iframe.js"
       ]
     }
   ],
