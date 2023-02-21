@@ -176,4 +176,12 @@ document.addEventListener("DOMContentLoaded", async function () {
   player.on("exitfullscreen", () => {
     changeFullScreen(false)
   })
+
+  window.addEventListener("message", function (event) {
+    if (event.source === parent) {
+      if (event.data === "close_camera") {
+        watchState.UIState.switch.cameraLocal = false
+      }
+    }
+  })
 })

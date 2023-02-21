@@ -138,6 +138,12 @@ export const renderCamera = async () => {
   }`
   document.head.appendChild(pseudoStyle)
 
+  closeCamera.addEventListener("click", () => {
+    document
+      .querySelector("#record_plugin")
+      .contentWindow.postMessage("close_camera", "*")
+  })
+
   if (navigator.mediaDevices.getUserMedia) {
     try {
       const _cameraStream = await navigator.mediaDevices.getUserMedia({

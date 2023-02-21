@@ -107,6 +107,9 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
   }
 
   const changeCameraLocalStream = (value) => {
+    if (cameraLocalSwitch.checked !== value) {
+      cameraLocalSwitch.checked = value
+    }
     if (value) {
       chrome.tabs.getCurrent((tab) => {
         chrome.tabs.sendMessage(tab.id, "onCamera")
