@@ -47,6 +47,7 @@ export const renderCamera = async () => {
 
   const smallSize = document.createElement("div")
   const largeSize = document.createElement("div")
+  const closeCamera = document.createElement("div")
 
   smallSize.style.width = "9px"
   smallSize.style.height = "9px"
@@ -84,11 +85,58 @@ export const renderCamera = async () => {
 
   container.addEventListener("mouseover", () => {
     changeSize.style.display = "flex"
+    closeCamera.style.display = "block"
   })
 
   container.addEventListener("mouseout", () => {
     changeSize.style.display = "none"
+    closeCamera.style.display = "none"
   })
+
+  closeCamera.id = "close_camera"
+  closeCamera.style.position = "absolute"
+  closeCamera.style.textAlign = "center"
+  closeCamera.style.width = "40px"
+  closeCamera.style.height = "40px"
+  closeCamera.style.boxShadow = "rgba(132, 164, 193, 0.15) 0px 4px 40px"
+  closeCamera.style.left = "7px"
+  closeCamera.style.top = "7px"
+  closeCamera.style.visibility = "visible"
+  closeCamera.style.background = "rgb(255, 255, 255)"
+  closeCamera.style.border = "1px solid rgb(211, 218, 223)"
+  closeCamera.style.borderRadius = "40px"
+  closeCamera.style.cursor = "pointer"
+  closeCamera.style.display = "none"
+  container.append(closeCamera)
+  closeCamera.addEventListener("mouseover", () => {
+    closeCamera.style.backgroundColor = "#d3c0c0"
+  })
+  closeCamera.addEventListener("mouseout", () => {
+    closeCamera.style.backgroundColor = "#fff"
+  })
+
+  const pseudoStyle = document.createElement("style")
+  pseudoStyle.innerHTML = `#close_camera::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 30px;
+    background-color: #3f3f3f;
+    transform: rotate(45deg);
+    top: 4.5px;
+    left: 19px;
+  }
+  #close_camera::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 30px;
+    background-color: #3f3f3f;
+    transform: rotate(-45deg);
+    top: 4.5px;
+    left: 19px;
+  }`
+  document.head.appendChild(pseudoStyle)
 
   if (navigator.mediaDevices.getUserMedia) {
     try {
