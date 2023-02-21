@@ -26,15 +26,20 @@ chrome.runtime.onMessage.addListener((msg, _, sendResponse) => {
       iframePlugin.style.backgroundColor = "rgba(0,0,0,0.0)"
       iframePlugin.style.height = "100px"
       iframePlugin.style.width = "150px"
-      iframePlugin.style.bottom = "0px"
-      iframePlugin.style.top = ""
       break
     }
     case "onCamera": {
       ;(async () => {
-        const src = chrome.runtime.getURL("js/renderContent/camera.js")
-        const contentScript = await import(src)
+        const src1 = chrome.runtime.getURL("js/renderContent/camera.js")
+        const contentScript = await import(src1)
         contentScript.renderCamera()
+        const src2 = chrome.runtime.getURL("libs/jquery-3.6.0.min.js")
+        await import(src2)
+        const src3 = chrome.runtime.getURL("libs/jquery-ui.min.js")
+        await import(src3)
+        $(function () {
+          $("#video_local").draggable({ containment: "#container_camera" })
+        })
       })()
       break
     }

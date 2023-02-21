@@ -10,6 +10,7 @@ export const renderCamera = async () => {
   container.style.pointerEvents = "none"
   document.body.appendChild(container)
   const video = document.createElement("video")
+  video.id = "video_local"
   video.style.position = "fixed"
   video.style.height = "200px"
   video.style.width = "200px"
@@ -17,6 +18,8 @@ export const renderCamera = async () => {
   video.style.objectFit = "cover"
   video.style.bottom = "30px"
   video.style.left = "30px"
+  video.style.pointerEvents = "auto"
+  video.style.cursor = "move"
   container.append(video)
   if (navigator.mediaDevices.getUserMedia) {
     try {

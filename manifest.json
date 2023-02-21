@@ -35,7 +35,9 @@
         "html/popup.html",
         "html/iframe.html",
         "js/renderContent/camera.js",
-        "js/renderContent/iframe.js"
+        "js/renderContent/iframe.js",
+        "libs/jquery-3.6.0.min.js",
+        "libs/jquery-ui.min.js"
       ]
     }
   ],
