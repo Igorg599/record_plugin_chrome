@@ -38,13 +38,13 @@ chrome.runtime.onMessage.addListener((msg, _, sendResponse) => {
         const src3 = chrome.runtime.getURL("libs/jquery-ui.min.js")
         await import(src3)
         $(function () {
-          $("#video_local").draggable({ containment: "#container_camera" })
+          $("#video_local").draggable({ containment: "#layout_camera" })
         })
       })()
       break
     }
     case "offCamera": {
-      document.querySelector("#container_camera").remove()
+      document.querySelector("#layout_camera").remove()
       break
     }
     default:
