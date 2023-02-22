@@ -70,6 +70,7 @@ input.check-toggle-round-flat+label {
   -ms-border-radius: 60px;
   -o-border-radius: 60px;
   border-radius: 60px;
+  box-shadow: 5px 5px 7px -2px rgb(34 60 80 / 60%);
 }
 
 input.check-toggle-round-flat+label:before,

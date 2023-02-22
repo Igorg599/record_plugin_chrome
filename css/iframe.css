@@ -74,6 +74,14 @@ h2 {
   height: 40px;
   font-size: 18px;
   border-radius: 11px;
+  box-shadow: -4px -8px 11px rgb(255 255 255 / 70%),
+  6px 6px 8px rgb(0 0 0 / 30%),
+  inset 3px 3px 11px rgb(255 255 255 / 70%),
+  inset 22px 22px 22px rgb(0 0 0 / 10%);
+}
+
+#record_run:hover {
+  background-color: #0b2ffa;
 }
 
 #record {
