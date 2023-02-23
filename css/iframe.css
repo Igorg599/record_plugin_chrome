@@ -3,6 +3,7 @@
 @import "./extra/playButton.css";
 @import "./extra/switchLang.css";
 @import "./extra/plyr-player.css";
+@import "./extra/radio_group.css";
 
 body {
   font-family: "Bebas Neue", cursive;

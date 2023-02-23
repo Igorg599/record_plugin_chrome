@@ -1,0 +1,96 @@
+.middle {
+  width: 100%;
+  text-align: center;
+}
+
+.middle input[type="radio"] {
+  display: none;
+}
+
+.middle input[type="radio"]:checked+.box {
+  background-color: #1F40FF;
+  box-shadow: -8px -8px 15px rgb(255 255 255 / 60%),
+  7px 7px 9px rgb(0 0 0 / 25%);
+}
+
+.middle input[type="radio"]:checked+.box span {
+  color: white;
+  transform: translateY(20px);
+}
+
+.middle input[type="radio"]:checked+.box span:before {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+.middle .box {
+  width: 120px;
+  height: 80px;
+  background-color: rgb(245, 245, 245);
+  transition: all 250ms ease;
+  will-change: transition;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  font-family: "Inter", sans-serif;
+  margin: 0 5px;
+  border-radius: 8px;
+  box-shadow: inset -3px -8px 15px rgb(255 255 255 / 60%),
+  inset 7px 7px 9px rgb(0 0 0 / 25%);
+}
+
+.middle .box:active {
+  transform: translateY(20px);
+}
+
+.middle .box span {
+  position: absolute;
+  transform: translate(0, 20px);
+  left: 0;
+  right: 0;
+  transition: all 300ms ease;
+  font-size: 1.3em;
+  user-select: none;
+  color: #000;
+}
+
+.middle .box span:before {
+  font-size: 1.2em;
+  font-family: FontAwesome;
+  display: block;
+  transform: translateY(-80px);
+  opacity: 0;
+  transition: all 300ms ease-in-out;
+  font-weight: normal;
+  color: white;
+  width: 24px;
+  height: 24px;
+  margin: 0 auto;
+}
+
+.middle .front-end span:before {
+  content: url('data:image/svg+xml;utf8,<svg fill="white" width="24" height="24" viewBox="0 -18.04 122.88 122.88" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  style="enable-background:new 0 0 122.88 86.79" xml:space="preserve"><g> <path d="M2.08,0H120.8h2.08v2.08v69.2v2.08h-2.08H77.57v8.29h7.28v5.15H37.88v-5.15h7.28v-8.29H2.08H0v-2.08V2.08V0H2.08L2.08,0 L2.08,0L2.08,0z M118.73,4.15H4.15V69.2h114.57L118.73,4.15L118.73,4.15L118.73,4.15L118.73,4.15z"/> </g> </svg>');
+}
+
+.middle .back-end span:before {
+  content: url('data:image/svg+xml;utf8,<svg fill="white" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 129 129"><g> <path d="m96.6,26.8h-86.1c-2.2,0-4.1,1.8-4.1,4.1v67.2c0,2.2 1.8,4.1 4.1,4.1h86.1c2.2,0 4.1-1.8 4.1-4.1v-19.4l14.9,14.9c0.8,0.8 1.8,1.2 2.9,1.2 0.5,0 1.1-0.1 1.6-0.3 1.5-0.6 2.5-2.1 2.5-3.8v-52.5c0-1.6-1-3.1-2.5-3.8-1.5-0.6-3.3-0.3-4.4,0.9l-14.9,14.9v-19.3c-0.1-2.3-1.9-4.1-4.2-4.1zm-4.1,33.3v8.8 25.2h-78v-59.2h78v25.2zm21.9-12v32.9l-13.7-13.7v-5.4l13.7-13.8z"/> </g> </svg>');
+}
+
+.middle p {
+  color: #fff;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+}
+
+.middle p a {
+  text-decoration: underline;
+  font-weight: bold;
+  color: #fff;
+}
+
+.middle p span:after {
+  content: "\f0e7";
+  font-family: FontAwesome;
+  color: yellow;
+}
