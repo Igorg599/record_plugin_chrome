@@ -6,6 +6,7 @@ const renderLangElements = (elements, i18nInstance, initialState) => {
     buttons: { run, play },
     downloadTitle,
     errors: { microphoneErr, cameraErr, cameraLocalErr },
+    tabs: { screen, cameraOnly },
   } = elements
 
   if (initialState?.language === "en") {
@@ -20,6 +21,8 @@ const renderLangElements = (elements, i18nInstance, initialState) => {
   play.textContent = i18nInstance.t("buttons.start")
   cameraTitle.textContent = i18nInstance.t("camera.on")
   cameraLocalTitle.textContent = i18nInstance.t("cameraLocal.on")
+  screen.children[0].textContent = i18nInstance.t("tabs.screen")
+  cameraOnly.children[0].textContent = i18nInstance.t("tabs.cameraOnly")
 }
 
 const watch = (elements, initialState, newMedia, i18nInstance) => {

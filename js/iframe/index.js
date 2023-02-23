@@ -51,6 +51,10 @@ document.addEventListener("DOMContentLoaded", async function () {
       run: document.querySelector("#record_run"),
       play: document.querySelector("#play"),
     },
+    tabs: {
+      screen: document.querySelector(".radio_screen"),
+      cameraOnly: document.querySelector(".radio_camera"),
+    },
     switch: {
       microphone: document.querySelector("#cb1"),
       microphoneTitle: document.querySelector(".switch_titleMicrophone"),

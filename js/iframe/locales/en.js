@@ -12,6 +12,10 @@ export default {
       on: "Enable camera in browser",
       off: "Turn off the camera in the browser",
     },
+    tabs: {
+      screen: "Screen",
+      cameraOnly: "Camera only",
+    },
     download: "Download record",
     start: "Go to recording mode",
     errors: {
