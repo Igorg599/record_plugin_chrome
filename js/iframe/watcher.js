@@ -45,6 +45,7 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
     gramophone,
     download,
     camera,
+    bigCamera,
     switchContainer: { cameraContainer, cameraLocalContainer },
   } = elements
 
@@ -56,10 +57,20 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
       gramophone.style.display = "none"
       control.style.display = "none"
       player.style.display = "block"
+      console.log(state.mode)
+      if (state.mode === "camera") {
+        bigCamera.style.display = "block"
+        bigCamera.srcObject = newMedia.cameraStream
+        bigCamera.play()
+      }
     } else {
       if (!state.emptyRecord) {
         gramophone.style.display = "block"
       }
+      if (newMedia.cameraStream) {
+        newMedia.resetCameraStream()
+      }
+      bigCamera.style.display = "none"
       control.style.display = "block"
       player.style.display = "none"
     }

@@ -70,6 +70,7 @@ button {
 
 .player {
   display: none;
+  padding-right: 30px;
 }
 
 h2 {
@@ -103,7 +104,7 @@ h2 {
   margin-right: 10px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 .download {
@@ -146,3 +147,14 @@ h2 {
   height: 100%;
 }
 
+#only_camera {
+  display: none;
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  width: 90vh;
+  height: 90vh;
+  transform: translate(-45vh, -45vh);
+  border-radius: 50%;
+  object-fit: cover;
+}

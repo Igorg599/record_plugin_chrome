@@ -84,6 +84,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     download: document.querySelector(".download"),
     pulse: document.querySelector(".pulse"),
     gramophone: document.querySelector(".gramophone"),
+    bigCamera: document.querySelector("#only_camera"),
   }
 
   const watchState = watch(elements, initialState, newMedia, i18nInstance)
@@ -103,19 +104,30 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   elements.buttons.run.addEventListener("click", async () => {
-    await newMedia.getFlowVideo()
-    if (newMedia.screenStream) {
-      chrome.tabs.getCurrent((tab) => {
-        chrome.tabs.sendMessage(tab.id, "record")
-      })
-      watchState.UIState.wiewIframe = "player"
-      newMedia.screenStream.oninactive = () => {
-        if (newMedia.mediaRecorder) {
-          newMedia.mediaRecorder.stop()
-          newMedia.resetMediaRecorder()
+    switch (watchState.mode) {
+      case "screen": {
+        await newMedia.getFlowVideo()
+        if (newMedia.screenStream) {
+          chrome.tabs.getCurrent((tab) => {
+            chrome.tabs.sendMessage(tab.id, "record_screen")
+          })
+          watchState.UIState.wiewIframe = "player"
+          newMedia.screenStream.oninactive = () => {
+            if (newMedia.mediaRecorder) {
+              newMedia.mediaRecorder.stop()
+              newMedia.resetMediaRecorder()
+            }
+            stopRecord()
+          }
         }
-        stopRecord()
+        break
       }
+      case "camera": {
+        watchState.UIState.wiewIframe = "player"
+        break
+      }
+      default:
+        break
     }
   })
 

@@ -109,6 +109,13 @@ export default class Media {
     }
   }
 
+  resetCameraStream() {
+    if (this.cameraStream?.getTracks) {
+      this.cameraStream.getTracks().forEach((track) => track.stop())
+      this.cameraStream = null
+    }
+  }
+
   resetMediaRecorder() {
     if (this.mediaRecorder) {
       this.mediaRecorder = null
