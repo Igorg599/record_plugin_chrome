@@ -20,6 +20,7 @@
         </div>
       </label>
     </div>
+    <p class="err_camera_tab"></p>
     <div class="switch_media">
       <p class="switch_titleMicrophone"></p>
       <div>
@@ -27,22 +28,26 @@
         <label class="tgl-btn" for="cb1"></label>
       </div>
     </div>
-    <p class="error_switch err_camera"></p>
-    <div class="switch_media">
-      <p class="switch_titleCameraLocal"></p>
-      <div>
-        <input class="tgl tgl-ios" id="cb3" type="checkbox" />
-        <label class="tgl-btn" for="cb3"></label>
-      </div>
-    </div>
-    <p class="error_switch err_cameraLocal"></p>
     <p class="error_switch err_microphone"></p>
-    <div class="switch_media">
-      <p class="switch_titleCamera"></p>
-      <div>
-        <input class="tgl tgl-ios" id="cb2" type="checkbox" />
-        <label class="tgl-btn" for="cb2"></label>
+    <div class="switch_container_cameraLocal">
+      <div class="switch_media">
+        <p class="switch_titleCameraLocal"></p>
+        <div>
+          <input class="tgl tgl-ios" id="cb3" type="checkbox" />
+          <label class="tgl-btn" for="cb3"></label>
+        </div>
       </div>
+      <p class="error_switch err_cameraLocal"></p>
+    </div>
+    <div class="switch_container_camera">
+      <div class="switch_media">
+        <p class="switch_titleCamera"></p>
+        <div>
+          <input class="tgl tgl-ios" id="cb2" type="checkbox" />
+          <label class="tgl-btn" for="cb2"></label>
+        </div>
+      </div>
+      <p class="error_switch err_camera"></p>
     </div>
     <button id="record_run"></button>
     <video class="recording" autoplay muted width="0px" height="0px"></video>

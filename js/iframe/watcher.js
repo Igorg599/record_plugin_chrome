@@ -5,7 +5,7 @@ const renderLangElements = (elements, i18nInstance, initialState) => {
     switch: { microphoneTitle, language, cameraTitle, cameraLocalTitle },
     buttons: { run, play },
     downloadTitle,
-    errors: { microphoneErr, cameraErr, cameraLocalErr },
+    errors: { microphoneErr, cameraErr, cameraLocalErr, cameraTab },
     tabs: { screen, cameraOnly },
   } = elements
 
@@ -23,6 +23,7 @@ const renderLangElements = (elements, i18nInstance, initialState) => {
   cameraLocalTitle.textContent = i18nInstance.t("cameraLocal.on")
   screen.children[0].textContent = i18nInstance.t("tabs.screen")
   cameraOnly.children[0].textContent = i18nInstance.t("tabs.cameraOnly")
+  cameraTab.textContent = i18nInstance.t("errors.camera")
 }
 
 const watch = (elements, initialState, newMedia, i18nInstance) => {
@@ -39,11 +40,12 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
     errors,
     control,
     player,
-    buttons: { play },
+    buttons: { play, run },
     pulse,
     gramophone,
     download,
     camera,
+    switchContainer: { cameraContainer, cameraLocalContainer },
   } = elements
 
   const changeViewUIframe = (state) => {
@@ -143,6 +145,46 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
     }
   }
 
+  const changeMode = async (state, value) => {
+    switch (value) {
+      case "camera": {
+        cameraContainer.style.display = "none"
+        cameraLocalContainer.style.display = "none"
+        if (state.UIState.switch.camera) {
+          if (document.pictureInPictureElement) {
+            document.exitPictureInPicture()
+          }
+        } else {
+          await newMedia.getFlowCamera()
+          if (!newMedia.cameraStream) {
+            run.disabled = true
+            run.style.cursor = "default"
+            errors.cameraTab.style.display = "block"
+          }
+        }
+        if (state.UIState.switch.cameraLocal) {
+          chrome.tabs.getCurrent((tab) => {
+            chrome.tabs.sendMessage(tab.id, "offCamera")
+          })
+          cameraLocalSwitch.checked = false
+          state.UIState.switch.cameraLocal = false
+        }
+        break
+      }
+      case "screen": {
+        cameraContainer.style.display = "block"
+        cameraLocalContainer.style.display = "block"
+        if (run.disabled) {
+          run.disabled = false
+          run.style.cursor = "pointer"
+          errors.cameraTab.style.display = "none"
+        }
+      }
+      default:
+        break
+    }
+  }
+
   const watchedObject = onChange(initialState, (path, value) => {
     switch (path) {
       case "UIState.wiewIframe": {
@@ -157,16 +199,16 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
         changeCameraStream(value)
         break
       }
-      case "UIState.switch.camera": {
-        changeCameraStream(value)
-        break
-      }
       case "UIState.switch.cameraLocal": {
         changeCameraLocalStream(value)
         break
       }
       case "recording": {
         changeRecord()
+        break
+      }
+      case "mode": {
+        changeMode(initialState, value)
         break
       }
       case "language": {

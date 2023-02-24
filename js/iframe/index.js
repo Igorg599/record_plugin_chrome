@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     language: defaultLanguage,
     fullscreen: false,
     emptyRecord: true,
+    mode: "screen",
     UIState: {
       wiewIframe: "control",
       switch: {
@@ -64,10 +65,17 @@ document.addEventListener("DOMContentLoaded", async function () {
       cameraLocalTitle: document.querySelector(".switch_titleCameraLocal"),
       language: document.querySelector("#language-toggle"),
     },
+    switchContainer: {
+      cameraContainer: document.querySelector(".switch_container_camera"),
+      cameraLocalContainer: document.querySelector(
+        ".switch_container_cameraLocal"
+      ),
+    },
     errors: {
       microphoneErr: document.querySelector(".err_microphone"),
       cameraErr: document.querySelector(".err_camera"),
       cameraLocalErr: document.querySelector(".err_cameraLocal"),
+      cameraTab: document.querySelector(".err_camera_tab"),
     },
     video: document.querySelector(".recording"),
     camera: document.querySelector(".recording_camera"),
@@ -171,6 +179,14 @@ document.addEventListener("DOMContentLoaded", async function () {
       watchState.language = "ru"
       lStorage.set("language_plugin", "ru")
     }
+  })
+
+  elements.tabs.screen.addEventListener("click", () => {
+    watchState.mode = "screen"
+  })
+
+  elements.tabs.cameraOnly.addEventListener("click", () => {
+    watchState.mode = "camera"
   })
 
   player.on("enterfullscreen", () => {

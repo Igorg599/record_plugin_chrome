@@ -20,6 +20,7 @@ export default {
     start: "Go to recording mode",
     errors: {
       switch: "Not supported or permission denied",
+      camera: "Camera recording not supported or permission denied",
     },
     buttons: {
       start: "Start",
