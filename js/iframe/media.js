@@ -6,7 +6,7 @@ export default class Media {
     this.mediaRecorder = null
   }
 
-  async getFlowVideo() {
+  async getFlowVideo(state) {
     if (navigator.mediaDevices.getDisplayMedia) {
       try {
         // получаем поток
@@ -16,6 +16,7 @@ export default class Media {
             height: { ideal: 1080 },
             frameRate: { ideal: 30, max: 60 },
           },
+          audio: state.UIState.switch.audio,
         })
         this.screenStream = _screenStream
       } catch (e) {

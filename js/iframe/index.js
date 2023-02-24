@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   elements.buttons.run.addEventListener("click", async () => {
     switch (watchState.mode) {
       case "screen": {
-        await newMedia.getFlowVideo()
+        await newMedia.getFlowVideo(watchState)
         if (newMedia.screenStream) {
           chrome.tabs.getCurrent((tab) => {
             chrome.tabs.sendMessage(tab.id, "record_screen")
@@ -173,10 +173,18 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   elements.switch.microphone.addEventListener("change", (e) => {
     watchState.UIState.switch.microphone = e.target.checked
+    if (e.target.checked) {
+      elements.switch.audio.checked = false
+      watchState.UIState.switch.audio = false
+    }
   })
 
   elements.switch.audio.addEventListener("change", (e) => {
     watchState.UIState.switch.audio = e.target.checked
+    if (e.target.checked) {
+      elements.switch.microphone.checked = false
+      watchState.UIState.switch.microphone = false
+    }
   })
 
   elements.switch.cameraSwitch.addEventListener("change", (e) => {
