@@ -66,12 +66,23 @@ export default class Media {
     video.srcObject = this.screenStream
     let combine
     if (this.voiceStream) {
-      combine = new MediaStream([
-        ...this.screenStream.getTracks(),
-        ...this.voiceStream.getTracks(),
-      ])
+      if (state.mode === "screen") {
+        combine = new MediaStream([
+          ...this.screenStream.getTracks(),
+          ...this.voiceStream.getTracks(),
+        ])
+      } else {
+        combine = new MediaStream([
+          ...this.cameraStream.getTracks(),
+          ...this.voiceStream.getTracks(),
+        ])
+      }
     } else {
-      combine = new MediaStream([...this.screenStream.getTracks()])
+      if (state.mode === "screen") {
+        combine = new MediaStream([...this.screenStream.getTracks()])
+      } else {
+        combine = new MediaStream([...this.cameraStream.getTracks()])
+      }
     }
     this.mediaRecorder = new MediaRecorder(combine)
 
@@ -106,13 +117,6 @@ export default class Media {
     if (this.voiceStream?.getTracks) {
       this.voiceStream.getTracks().forEach((track) => track.stop())
       this.voiceStream = null
-    }
-  }
-
-  resetCameraStream() {
-    if (this.cameraStream?.getTracks) {
-      this.cameraStream.getTracks().forEach((track) => track.stop())
-      this.cameraStream = null
     }
   }
 

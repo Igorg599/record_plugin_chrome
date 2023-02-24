@@ -57,7 +57,6 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
       gramophone.style.display = "none"
       control.style.display = "none"
       player.style.display = "block"
-      console.log(state.mode)
       if (state.mode === "camera") {
         bigCamera.style.display = "block"
         bigCamera.srcObject = newMedia.cameraStream
@@ -66,9 +65,6 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
     } else {
       if (!state.emptyRecord) {
         gramophone.style.display = "block"
-      }
-      if (newMedia.cameraStream) {
-        newMedia.resetCameraStream()
       }
       bigCamera.style.display = "none"
       control.style.display = "block"
