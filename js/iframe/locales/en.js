@@ -13,7 +13,7 @@ export default {
       off: "Turn off the camera in the browser",
     },
     tabs: {
-      screen: "Screen",
+      screen: "Screen, window or tab",
       cameraOnly: "Camera only",
     },
     download: "Download record",

@@ -15,16 +15,18 @@
 
 .middle input[type="radio"]:checked+.box span {
   color: white;
-  transform: translateY(20px);
+  transform: translateY(10px);
+  padding: 0 5px;
 }
 
 .middle input[type="radio"]:checked+.box span:before {
   transform: translateY(0px);
   opacity: 1;
+  padding: 0 5px;
 }
 
 .middle .box {
-  width: 120px;
+  width: 130px;
   height: 80px;
   background-color: rgb(245, 245, 245);
   transition: all 250ms ease;
@@ -41,18 +43,19 @@
 }
 
 .middle .box:active {
-  transform: translateY(20px);
+  transform: translateY(10px);
 }
 
 .middle .box span {
   position: absolute;
-  transform: translate(0, 20px);
+  transform: translate(0, 10px);
   left: 0;
   right: 0;
   transition: all 300ms ease;
   font-size: 1.3em;
   user-select: none;
   color: #000;
+  padding: 0 5px;
 }
 
 .middle .box span:before {
