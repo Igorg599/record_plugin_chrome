@@ -11,7 +11,11 @@ export default class Media {
       try {
         // получаем поток
         const _screenStream = await navigator.mediaDevices.getDisplayMedia({
-          video: true,
+          video: {
+            width: { ideal: 1920 },
+            height: { ideal: 1080 },
+            frameRate: { ideal: 30, max: 60 },
+          },
         })
         this.screenStream = _screenStream
       } catch (e) {
@@ -43,7 +47,12 @@ export default class Media {
       try {
         // получаем поток
         const _cameraStream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: "user" },
+          video: {
+            facingMode: "user",
+            width: { min: 1024, ideal: 1280, max: 1920 },
+            height: { min: 576, ideal: 720, max: 1080 },
+            frameRate: { ideal: 30, max: 60 },
+          },
         })
         this.cameraStream = _cameraStream
       } catch (e) {
