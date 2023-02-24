@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         microphone: false,
         camera: false,
         cameraLocal: false,
+        audio: false,
       },
     },
   }
@@ -63,6 +64,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       cameraTitle: document.querySelector(".switch_titleCamera"),
       cameraLocalSwitch: document.querySelector("#cb3"),
       cameraLocalTitle: document.querySelector(".switch_titleCameraLocal"),
+      audio: document.querySelector("#cb4"),
+      audioTitle: document.querySelector(".switch_titleAudio"),
       language: document.querySelector("#language-toggle"),
     },
     switchContainer: {
@@ -70,6 +73,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       cameraLocalContainer: document.querySelector(
         ".switch_container_cameraLocal"
       ),
+      audioContainer: document.querySelector(".switch_container_audio"),
     },
     errors: {
       microphoneErr: document.querySelector(".err_microphone"),
@@ -169,6 +173,10 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   elements.switch.microphone.addEventListener("change", (e) => {
     watchState.UIState.switch.microphone = e.target.checked
+  })
+
+  elements.switch.audio.addEventListener("change", (e) => {
+    watchState.UIState.switch.audio = e.target.checked
   })
 
   elements.switch.cameraSwitch.addEventListener("change", (e) => {

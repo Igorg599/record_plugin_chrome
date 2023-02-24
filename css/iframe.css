@@ -42,7 +42,8 @@ button {
 
 .switch_titleMicrophone,
 .switch_titleCamera,
-.switch_titleCameraLocal {
+.switch_titleCameraLocal,
+.switch_titleAudio {
   font-family: "Arial";
   font-size: 14px;
   margin: 0;

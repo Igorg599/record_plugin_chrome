@@ -1,26 +1,41 @@
 import onChange from "../../libs/onChanhe.min.js"
 
-const renderLangElements = (elements, i18nInstance, initialState) => {
+const renderLangElements = (elements, i18nInstance, state) => {
   const {
-    switch: { microphoneTitle, language, cameraTitle, cameraLocalTitle },
+    switch: {
+      microphoneTitle,
+      language,
+      cameraTitle,
+      cameraLocalTitle,
+      audioTitle,
+    },
     buttons: { run, play },
     downloadTitle,
     errors: { microphoneErr, cameraErr, cameraLocalErr, cameraTab },
     tabs: { screen, cameraOnly },
   } = elements
 
-  if (initialState?.language === "en") {
+  if (state?.language === "en") {
     language.checked = true
   }
-  microphoneTitle.textContent = i18nInstance.t("microphone.on")
   downloadTitle.textContent = i18nInstance.t("download")
   run.textContent = i18nInstance.t("start")
   microphoneErr.textContent = i18nInstance.t("errors.switch")
   cameraErr.textContent = i18nInstance.t("errors.switch")
   cameraLocalErr.textContent = i18nInstance.t("errors.switch")
   play.textContent = i18nInstance.t("buttons.start")
-  cameraTitle.textContent = i18nInstance.t("camera.on")
-  cameraLocalTitle.textContent = i18nInstance.t("cameraLocal.on")
+  cameraTitle.textContent = state.UIState.switch.camera
+    ? i18nInstance.t("camera.off")
+    : i18nInstance.t("camera.on")
+  cameraLocalTitle.textContent = state.UIState.switch.cameraLocal
+    ? i18nInstance.t("cameraLocal.off")
+    : i18nInstance.t("cameraLocal.on")
+  microphoneTitle.textContent = state.UIState.switch.microphone
+    ? i18nInstance.t("microphone.off")
+    : i18nInstance.t("microphone.on")
+  audioTitle.textContent = state.UIState.switch.audio
+    ? i18nInstance.t("audio.off")
+    : i18nInstance.t("audio.on")
   screen.children[0].textContent = i18nInstance.t("tabs.screen")
   cameraOnly.children[0].textContent = i18nInstance.t("tabs.cameraOnly")
   cameraTab.textContent = i18nInstance.t("errors.camera")
@@ -36,6 +51,7 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
       cameraTitle,
       cameraSwitch,
       cameraLocalSwitch,
+      audioTitle,
     },
     errors,
     control,
@@ -46,7 +62,7 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
     download,
     camera,
     bigCamera,
-    switchContainer: { cameraContainer, cameraLocalContainer },
+    switchContainer: { cameraContainer, cameraLocalContainer, audioContainer },
   } = elements
 
   const changeViewUIframe = (state) => {
@@ -85,6 +101,14 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
     } else {
       newMedia.resetVoiceStream()
       microphoneTitle.textContent = i18nInstance.t("microphone.on")
+    }
+  }
+
+  const changeAudioStream = (value) => {
+    if (value) {
+      audioTitle.textContent = i18nInstance.t("audio.off")
+    } else {
+      audioTitle.textContent = i18nInstance.t("audio.on")
     }
   }
 
@@ -157,6 +181,7 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
       case "camera": {
         cameraContainer.style.display = "none"
         cameraLocalContainer.style.display = "none"
+        audioContainer.style.display = "none"
         if (state.UIState.switch.camera) {
           if (document.pictureInPictureElement) {
             document.exitPictureInPicture()
@@ -181,6 +206,7 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
       case "screen": {
         cameraContainer.style.display = "block"
         cameraLocalContainer.style.display = "block"
+        audioContainer.style.display = "block"
         if (run.disabled) {
           run.disabled = false
           run.style.cursor = "pointer"
@@ -202,6 +228,10 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
         changeVoiceStream(value)
         break
       }
+      case "UIState.switch.audio": {
+        changeAudioStream(value)
+        break
+      }
       case "UIState.switch.camera": {
         changeCameraStream(value)
         break
@@ -221,7 +251,7 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
       case "language": {
         i18nInstance
           .changeLanguage(value)
-          .then(() => renderLangElements(elements, i18nInstance))
+          .then(() => renderLangElements(elements, i18nInstance, initialState))
         break
       }
       case "fullscreen": {

@@ -8,6 +8,10 @@ export default {
       on: "Enable camera outside of browser",
       off: "Turn off the camera outside of browser",
     },
+    audio: {
+      on: "Enable audio tabs (systems)",
+      off: "Turn off audio tabs (systems)",
+    },
     cameraLocal: {
       on: "Enable camera in browser",
       off: "Turn off the camera in the browser",
