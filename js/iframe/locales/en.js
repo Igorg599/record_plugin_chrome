@@ -25,6 +25,8 @@ export default {
     errors: {
       switch: "Not supported or permission denied",
       camera: "Camera recording not supported or permission denied",
+      audio:
+        "To access the audio system, you will need to check the appropriate checkbox in the permissions box",
     },
     buttons: {
       start: "Start",

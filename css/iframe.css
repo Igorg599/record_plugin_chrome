@@ -59,6 +59,10 @@ button {
   margin: -3px 0 0 0;
 }
 
+.warning_audio {
+  margin-top: 0;
+}
+
 .err_camera_tab {
   display: none;
   color: #d32f2f;

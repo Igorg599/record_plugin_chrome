@@ -80,6 +80,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       cameraErr: document.querySelector(".err_camera"),
       cameraLocalErr: document.querySelector(".err_cameraLocal"),
       cameraTab: document.querySelector(".err_camera_tab"),
+      audioWarning: document.querySelector(".warning_audio"),
     },
     video: document.querySelector(".recording"),
     camera: document.querySelector(".recording_camera"),

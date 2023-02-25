@@ -11,7 +11,13 @@ const renderLangElements = (elements, i18nInstance, state) => {
     },
     buttons: { run, play },
     downloadTitle,
-    errors: { microphoneErr, cameraErr, cameraLocalErr, cameraTab },
+    errors: {
+      microphoneErr,
+      cameraErr,
+      cameraLocalErr,
+      cameraTab,
+      audioWarning,
+    },
     tabs: { screen, cameraOnly },
   } = elements
 
@@ -23,6 +29,7 @@ const renderLangElements = (elements, i18nInstance, state) => {
   microphoneErr.textContent = i18nInstance.t("errors.switch")
   cameraErr.textContent = i18nInstance.t("errors.switch")
   cameraLocalErr.textContent = i18nInstance.t("errors.switch")
+  audioWarning.textContent = i18nInstance.t("errors.audio")
   play.textContent = i18nInstance.t("buttons.start")
   cameraTitle.textContent = state.UIState.switch.camera
     ? i18nInstance.t("camera.off")
@@ -107,8 +114,10 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
   const changeAudioStream = (value) => {
     if (value) {
       audioTitle.textContent = i18nInstance.t("audio.off")
+      errors.audioWarning.style.display = "block"
     } else {
       audioTitle.textContent = i18nInstance.t("audio.on")
+      errors.audioWarning.style.display = "none"
     }
   }
 
