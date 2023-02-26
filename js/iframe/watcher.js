@@ -71,6 +71,7 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
     bigCamera,
     switchContainer: { cameraContainer, cameraLocalContainer, audioContainer },
     close,
+    closeRecord,
   } = elements
 
   const changeViewUIframe = (state) => {
@@ -177,10 +178,12 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
       play.classList.remove("is-clicked")
       pulse.classList.remove("pulsating-circle")
       play.textContent = i18nInstance.t("buttons.start")
+      closeRecord.style.display = "block"
     } else {
       play.classList.add("is-clicked")
       pulse.classList.add("pulsating-circle")
       play.textContent = i18nInstance.t("buttons.stop")
+      closeRecord.style.display = "none"
     }
   }
 

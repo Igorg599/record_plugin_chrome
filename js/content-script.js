@@ -25,7 +25,7 @@ chrome.runtime.onMessage.addListener((msg, _, sendResponse) => {
     case "record_screen": {
       iframePlugin.style.backgroundColor = "rgba(0,0,0,0.0)"
       iframePlugin.style.height = "100px"
-      iframePlugin.style.width = "150px"
+      iframePlugin.style.width = "175px"
       break
     }
     case "onCamera": {

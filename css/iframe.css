@@ -5,6 +5,7 @@
 @import "./extra/plyr-player.css";
 @import "./extra/radio_group.css";
 @import "./extra/close.css";
+@import "./extra/close_record.css";
 
 body {
   font-family: "Bebas Neue", cursive;

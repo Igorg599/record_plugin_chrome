@@ -91,6 +91,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     gramophone: document.querySelector(".gramophone"),
     bigCamera: document.querySelector("#only_camera"),
     close: document.querySelector(".close-container"),
+    closeRecord: document.querySelector(".close-button"),
   }
 
   const watchState = watch(elements, initialState, newMedia, i18nInstance)
@@ -137,8 +138,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   })
 
-  elements.buttons.play.addEventListener("click", (e) => {
-    e.stopImmediatePropagation()
+  elements.buttons.play.addEventListener("click", () => {
     watchState.recording = !watchState.recording
     if (!elements.buttons.play.classList.contains("is-clicked")) {
       if (newMedia.mediaRecorder) {
@@ -152,6 +152,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         newMedia.mediaRecorder.start()
       }
     }
+  })
+
+  elements.closeRecord.addEventListener("click", () => {
+    stopRecord()
   })
 
   elements.close.addEventListener("click", () => {
