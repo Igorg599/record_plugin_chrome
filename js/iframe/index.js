@@ -46,7 +46,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   const elements = {
-    body: document.querySelector("body"),
     control: document.querySelector(".control"),
     player: document.querySelector(".player"),
     buttons: {
@@ -90,6 +89,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     pulse: document.querySelector(".pulse"),
     gramophone: document.querySelector(".gramophone"),
     bigCamera: document.querySelector("#only_camera"),
+    close: document.querySelector(".close-container"),
   }
 
   const watchState = watch(elements, initialState, newMedia, i18nInstance)
@@ -153,23 +153,13 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   })
 
-  elements.body.addEventListener("click", () => {
-    if (watchState.UIState.wiewIframe === "control") {
-      chrome.tabs.getCurrent((tab) => {
-        chrome.tabs.sendMessage(tab.id, "offCamera")
-      })
-      chrome.tabs.getCurrent((tab) => {
-        chrome.tabs.sendMessage(tab.id, "close")
-      })
-    }
-  })
-
-  elements.control.addEventListener("click", (e) => {
-    e.stopImmediatePropagation()
-  })
-
-  elements.gramophone.addEventListener("click", (e) => {
-    e.stopImmediatePropagation()
+  elements.close.addEventListener("click", () => {
+    chrome.tabs.getCurrent((tab) => {
+      chrome.tabs.sendMessage(tab.id, "offCamera")
+    })
+    chrome.tabs.getCurrent((tab) => {
+      chrome.tabs.sendMessage(tab.id, "close")
+    })
   })
 
   elements.switch.microphone.addEventListener("change", (e) => {

@@ -70,6 +70,7 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
     camera,
     bigCamera,
     switchContainer: { cameraContainer, cameraLocalContainer, audioContainer },
+    close,
   } = elements
 
   const changeViewUIframe = (state) => {
@@ -80,6 +81,7 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
       gramophone.style.display = "none"
       control.style.display = "none"
       player.style.display = "block"
+      close.style.display = "none"
       if (state.mode === "camera") {
         bigCamera.style.display = "block"
         bigCamera.srcObject = newMedia.cameraStream
@@ -92,6 +94,7 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
       bigCamera.style.display = "none"
       control.style.display = "block"
       player.style.display = "none"
+      close.style.display = "block"
     }
   }
 
