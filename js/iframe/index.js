@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   })
   const newMedia = new Media()
   const defaultLanguage = lStorage.get("language_plugin") || "en"
+  newMedia.getFlowCamera()
 
   const i18nInstance = i18next.createInstance()
   await i18nInstance.init({

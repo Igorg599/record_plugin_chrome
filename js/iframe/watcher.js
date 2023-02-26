@@ -131,20 +131,16 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
     if (value) {
       cameraTitle.textContent = i18nInstance.t("camera.off")
       if (newMedia.cameraStream) {
-        camera.requestPictureInPicture()
-      } else {
-        await newMedia.getFlowCamera()
-        if (newMedia.cameraStream) {
-          camera.srcObject = newMedia.cameraStream
-          camera.play()
-          camera.onloadedmetadata = function () {
-            camera.requestPictureInPicture()
-          }
-        } else {
-          errors.cameraErr.style.display = "block"
-          cameraSwitch.checked = false
-          cameraSwitch.disabled = true
+        camera.srcObject = newMedia.cameraStream
+        camera.play()
+        camera.onloadedmetadata = function () {
+          camera.requestPictureInPicture()
         }
+      } else {
+        errors.cameraErr.style.display = "block"
+        cameraSwitch.checked = false
+        cameraSwitch.disabled = true
+        cameraTitle.textContent = i18nInstance.t("camera.on")
       }
     } else {
       if (document.pictureInPictureElement) {
@@ -198,13 +194,11 @@ const watch = (elements, initialState, newMedia, i18nInstance) => {
           if (document.pictureInPictureElement) {
             document.exitPictureInPicture()
           }
-        } else {
-          await newMedia.getFlowCamera()
-          if (!newMedia.cameraStream) {
-            run.disabled = true
-            run.style.cursor = "default"
-            errors.cameraTab.style.display = "block"
-          }
+        }
+        if (!newMedia.cameraStream) {
+          run.disabled = true
+          run.style.cursor = "default"
+          errors.cameraTab.style.display = "block"
         }
         if (state.UIState.switch.cameraLocal) {
           chrome.tabs.getCurrent((tab) => {
