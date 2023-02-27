@@ -1,1 +1,1 @@
-Recording Plagin
+Recording Plugin

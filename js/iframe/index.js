@@ -30,10 +30,14 @@ document.addEventListener("DOMContentLoaded", async function () {
   })
 
   const initialState = {
+    //активность записи
     recording: false,
     language: defaultLanguage,
+    // полный экран для плеера
     fullscreen: false,
+    // проверка на то, что запись не пустая
     emptyRecord: true,
+    // режим - screen или camera
     mode: "screen",
     UIState: {
       wiewIframe: "control",
