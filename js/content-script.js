@@ -2,14 +2,6 @@ chrome.runtime.onMessage.addListener((msg, _, sendResponse) => {
   const iframePlugin = document.querySelector("#record_plugin")
 
   switch (msg) {
-    case "initialization": {
-      addEventListener(evtFromPage, (e) => {
-        chrome.runtime.sendMessage(e.detail)
-        sendResponse(e.detail), { once: true }
-      })
-      dispatchEvent(new Event(evtToPage))
-      break
-    }
     case "close": {
       iframePlugin?.remove()
       break
@@ -44,7 +36,7 @@ chrome.runtime.onMessage.addListener((msg, _, sendResponse) => {
       break
     }
     case "offCamera": {
-      document.querySelector("#layout_camera").remove()
+      document.querySelector("#layout_camera")?.remove()
       break
     }
     default:
